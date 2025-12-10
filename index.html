@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islamic Tools</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <aside class="sidebar">
+            <h2>Islamic Tools</h2>
+            <ul>
+            </ul>
+        </aside>
+        <main class="main-content">
+            <div class="container">
+                <div class="ad-space">Google Ad Banner (Top)</div>
+                <h1>Welcome to Islamic Tools</h1>
+                <div id="tool-links"></div>
+            </div>
+        </main>
+    </div>
+    <script src="tools.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const toolLinks = document.getElementById("tool-links");
+            tools.forEach(tool => {
+                const link = document.createElement("a");
+                link.href = tool.url.substring(1); // Remove the leading slash
+                link.textContent = tool.name;
+                link.style.display = "block";
+                link.style.margin = "10px 0";
+                toolLinks.appendChild(link);
+            });
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

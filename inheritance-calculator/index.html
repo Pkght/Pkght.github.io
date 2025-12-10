@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate the distribution of inheritance according to Islamic law.">
+    <meta name="keywords" content="inheritance, islamic inheritance, mirath, faraid">
+    <title>Inheritance Calculator</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <aside class="sidebar">
+            <h2>Islamic Tools</h2>
+            <ul>
+            </ul>
+        </aside>
+        <main class="main-content">
+            <div class="container">
+                <div class="ad-space">Google Ad Banner (Top)</div>
+                <h1>Islamic Inheritance Calculator</h1>
+                <p class="subtitle">Enter the details of the deceased and their assets to calculate the distribution of inheritance according to Islamic law.</p>
+
+                <h3 class="section-title">Step 1: Deceased's Information</h3>
+                <div class="form-group">
+                    <label>Total Value of Estate (Assets - Debts)</label>
+                    <input type="number" id="estateValue" placeholder="e.g., 100000">
+                </div>
+
+                <h3 class="section-title">Step 2: Surviving Heirs</h3>
+                <div class="form-group">
+                    <label for="spouse">Spouse:</label>
+                    <select id="spouse" name="spouse">
+                        <option value="none">None</option>
+                        <option value="husband">Husband</option>
+                        <option value="wife">Wife</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Number of Sons:</label>
+                    <input type="number" id="sons" value="0">
+                </div>
+                <div class="form-group">
+                    <label>Number of Daughters:</label>
+                    <input type="number" id="daughters" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="father">Father:</label>
+                    <select id="father" name="father">
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mother">Mother:</label>
+                    <select id="mother" name="mother">
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+
+                <button onclick="calculateInheritance()">Calculate Inheritance</button>
+
+                <div class="ad-space">Google Ad Banner (Middle)</div>
+                <div id="result" style="display: none;">
+                    <h3 class="section-title">Distribution of Shares</h3>
+                    <div id="shares"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="tools.js"></script>
+    <script src="script.js"></script>
+    <script src="inheritance.js"></script>
+</body>
+</html>
