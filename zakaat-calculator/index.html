@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A simple and easy-to-use Zakat calculator to help you calculate your annual Zakat.">
     <meta name="keywords" content="zakat, zakat calculator, islamic finance, charity, islam">
-    <title>Simple Zakat Calculator</title>
+    <title>Simple Zakat Calculator - QuickNisab.com</title>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "Zakat Calculator",
-      "url": "https://www.yoursite.com/zakaat-calculator",
+      "url": "https://quicknisab.com/zakaat-calculator",
       "description": "A simple and easy-to-use Zakat calculator to help you calculate your annual Zakat.",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Web",
@@ -100,54 +100,7 @@
         </main>
     </div>
 
-    <script>
-        function calculateZakat() {
-            // 1. Get Inputs
-            let goldRate = parseFloat(document.getElementById('goldRate').value) || 0;
-            let silverRate = parseFloat(document.getElementById('silverRate').value) || 0;
-            
-            let cash = parseFloat(document.getElementById('cash').value) || 0;
-            let goldGrams = parseFloat(document.getElementById('goldGrams').value) || 0;
-            let silverGrams = parseFloat(document.getElementById('silverGrams').value) || 0;
-            let investments = parseFloat(document.getElementById('investments').value) || 0;
-            let debts = parseFloat(document.getElementById('debts').value) || 0;
-
-            // 2. Calculate Values
-            let goldValue = goldGrams * goldRate;
-            let silverValue = silverGrams * silverRate;
-            let totalAssets = cash + goldValue + silverValue + investments;
-            let netWorth = totalAssets - debts;
-
-            // 3. Calculate Nisab (Using Silver Standard - 612.36 grams)
-            // Silver is usually the lower threshold, making it safer for the payer.
-            let nisabThreshold = silverRate * 612.36;
-
-            // 4. Calculate Zakat (2.5%)
-            let zakatPayable = 0;
-            let isEligible = false;
-
-            if (netWorth >= nisabThreshold && nisabThreshold > 0) {
-                zakatPayable = netWorth * 0.025;
-                isEligible = true;
-            }
-
-            // 5. Display Results
-            document.getElementById('result').style.display = 'block';
-            document.getElementById('displayTotalAssets').innerText = totalAssets.toLocaleString();
-            document.getElementById('displayNisab').innerText = nisabThreshold.toLocaleString();
-            
-            if (isEligible) {
-                document.getElementById('displayZakat').innerText = zakatPayable.toLocaleString();
-                document.getElementById('notEligible').style.display = 'none';
-                document.querySelector('.final-zakat').style.display = 'flex';
-            } else {
-                document.getElementById('displayZakat').innerText = "0";
-                document.querySelector('.final-zakat').style.display = 'none';
-                document.getElementById('notEligible').style.display = 'block';
-            }
-        }
-    </script>
-    <script src="tools.js"></script>
-    <script src="script.js"></script>
+    <script src="../tools.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>
