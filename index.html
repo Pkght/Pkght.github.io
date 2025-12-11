@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Islamic Tools</title>
+    <title>Islamic Tools - Your Guide to Islamic Practices</title>
+    <meta name="description" content="A collection of free online tools to help you with your Islamic practices. Calculate your Zakat, plan your inheritance, and more.">
+    <meta name="keywords" content="Islamic tools, Zakat calculator, inheritance calculator, Islamic practices, Muslim tools">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,9 +17,10 @@
         </aside>
         <main class="main-content">
             <div class="container">
-                <div class="ad-space">Google Ad Banner (Top)</div>
                 <h1>Welcome to Islamic Tools</h1>
+                <p>This website provides a collection of free online tools to help you with your Islamic practices. Whether you need to calculate your Zakat, plan your inheritance, or learn more about Islamic rituals, we have the tools to assist you.</p>
                 <div id="tool-links"></div>
+                <div class="ad-space">Google Ad Banner (Top)</div>
             </div>
         </main>
     </div>
@@ -31,7 +34,12 @@
                 link.textContent = tool.name;
                 link.style.display = "block";
                 link.style.margin = "10px 0";
+                
+                const description = document.createElement("p");
+                description.textContent = tool.description;
+                
                 toolLinks.appendChild(link);
+                toolLinks.appendChild(description);
             });
         });
     </script>

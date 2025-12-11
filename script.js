@@ -3,6 +3,17 @@ document.addEventListener("DOMContentLoaded", function() {
     const currentPath = window.location.pathname;
     const isSubdirectory = currentPath.includes("zakaat-calculator") || currentPath.includes("inheritance-calculator");
 
+    // Add a "Home" link
+    const homeListItem = document.createElement("li");
+    const homeLink = document.createElement("a");
+    homeLink.textContent = "Home";
+    homeLink.href = isSubdirectory ? ".." : ".";
+    if (currentPath === "/" || currentPath === "/index.html") {
+        homeLink.classList.add("active");
+    }
+    homeListItem.appendChild(homeLink);
+    sidebarList.appendChild(homeListItem);
+
     tools.forEach(tool => {
         const listItem = document.createElement("li");
         const link = document.createElement("a");
@@ -13,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         link.href = isSubdirectory ? "../" + toolUrl : toolUrl;
 
-        if (currentPath.endsWith(tool.url)) {
+        if (currentPath.includes(toolUrl)) {
             link.classList.add("active");
         }
 
@@ -30,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <a href="${privacyLink}">Privacy Policy</a> |
             <a href="${disclaimerLink}">Disclaimer</a>
         </div>
-        <p>&copy; 2025 QuickNisab.com. All rights reserved.</p>
+        <p>&copy; 2025 Islamic Tools. All rights reserved.</p>
     `;
     document.body.appendChild(footer);
 });
