@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Islamic Tools - Your Guide to Islamic Practices</title>
-    <meta name="description" content="A collection of free online tools to help you with your Islamic practices. Calculate your Zakat, plan your inheritance, and more.">
-    <meta name="keywords" content="Islamic tools, Zakat calculator, inheritance calculator, Islamic practices, Muslim tools">
+    <meta name="description"
+        content="A collection of free online tools to help you with your Islamic practices. Calculate your Zakat, plan your inheritance, and more.">
+    <meta name="keywords"
+        content="Islamic tools, Zakat calculator, inheritance calculator, Islamic practices, Muslim tools">
     <link rel="stylesheet" href="style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2826469813017365"
+        crossorigin="anonymous"></script>
 </head>
+
 <body>
     <div class="app-wrapper">
         <aside class="sidebar">
@@ -18,7 +24,9 @@
         <main class="main-content">
             <div class="container">
                 <h1>Welcome to Islamic Tools</h1>
-                <p>This website provides a collection of free online tools to help you with your Islamic practices. Whether you need to calculate your Zakat, plan your inheritance, or learn more about Islamic rituals, we have the tools to assist you.</p>
+                <p>This website provides a collection of free online tools to help you with your Islamic practices.
+                    Whether you need to calculate your Zakat, plan your inheritance, or learn more about Islamic
+                    rituals, we have the tools to assist you.</p>
                 <div id="tool-links"></div>
                 <div class="ad-space">Google Ad Banner (Top)</div>
             </div>
@@ -26,7 +34,7 @@
     </div>
     <script src="tools.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const toolLinks = document.getElementById("tool-links");
             tools.forEach(tool => {
                 const link = document.createElement("a");
@@ -34,10 +42,10 @@
                 link.textContent = tool.name;
                 link.style.display = "block";
                 link.style.margin = "10px 0";
-                
+
                 const description = document.createElement("p");
                 description.textContent = tool.description;
-                
+
                 toolLinks.appendChild(link);
                 toolLinks.appendChild(description);
             });
@@ -45,4 +53,5 @@
     </script>
     <script src="script.js"></script>
 </body>
+
 </html>
