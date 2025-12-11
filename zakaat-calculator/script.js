@@ -1,30 +1,48 @@
 function calculateZakat() {
-    const goldRate = parseFloat(document.getElementById('goldRate').value) || 0;
-    const silverRate = parseFloat(document.getElementById('silverRate').value) || 0;
-    const cash = parseFloat(document.getElementById('cash').value) || 0;
-    const goldGrams = parseFloat(document.getElementById('goldGrams').value) || 0;
-    const silverGrams = parseFloat(document.getElementById('silverGrams').value) || 0;
-    const investments = parseFloat(document.getElementById('investments').value) || 0;
-    const debts = parseFloat(document.getElementById('debts').value) || 0;
+    const get = (id) => parseFloat(document.getElementById(id).value) || 0;
 
-    const goldValue = goldGrams * goldRate;
+    // Inputs
+    const goldRate     = get("goldRate");
+    const silverRate   = get("silverRate");
+    const cash         = get("cash");
+    const goldGrams    = get("goldGrams");
+    const silverGrams  = get("silverGrams");
+    const investments  = get("investments");
+    const debts        = get("debts");
+    const nisabType    = document.getElementById("nisabType").value;
+
+    // Asset values
+    const goldValue   = goldGrams * goldRate;
     const silverValue = silverGrams * silverRate;
 
     const totalAssets = cash + goldValue + silverValue + investments;
-    const netAssets = totalAssets - debts;
+    const netAssets   = Math.max(totalAssets - debts, 0);
 
-    const nisabThreshold = 612.36 * silverRate;
-
-    document.getElementById('displayTotalAssets').textContent = totalAssets.toFixed(2);
-    document.getElementById('displayNisab').textContent = nisabThreshold.toFixed(2);
-
-    document.getElementById('result').style.display = 'block';
-    if (netAssets >= nisabThreshold) {
-        const zakatPayable = netAssets * 0.025;
-        document.getElementById('displayZakat').textContent = zakatPayable.toFixed(2);
-        document.getElementById('notEligible').style.display = 'none';
+    // Nisab
+    let nisabThreshold = 0;
+    if (nisabType === "silver") {
+        nisabThreshold = 612.36 * silverRate;
     } else {
-        document.getElementById('displayZakat').textContent = '0';
-        document.getElementById('notEligible').style.display = 'block';
+        nisabThreshold = 87.48 * goldRate;
+    }
+
+    // Update UI
+    document.getElementById("displayTotalAssets").textContent = totalAssets.toFixed(2);
+    document.getElementById("displayNisab").textContent = nisabThreshold.toFixed(2);
+    document.getElementById("result").style.display = "block";
+
+    // Zakat
+    if (netAssets >= nisabThreshold) {
+        const zakat = netAssets * 0.025;
+        document.getElementById("displayZakat").textContent = zakat.toFixed(2);
+        document.getElementById("notEligible").style.display = "none";
+    } else {
+        document.getElementById("displayZakat").textContent = "0.00";
+        document.getElementById("notEligible").style.display = "block";
     }
 }
+
+// Optional: Auto-calculate on every change
+document.querySelectorAll("input, select").forEach(el => {
+    el.addEventListener("input", calculateZakat);
+});
