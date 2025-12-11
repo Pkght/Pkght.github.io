@@ -22,8 +22,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     const footer = document.createElement("footer");
-    const privacyLink = isSubdirectory ? "../zakaat-calculator/privacy.html" : "zakaat-calculator/privacy.html";
-    const disclaimerLink = isSubdirectory ? "../zakaat-calculator/disclaimer.html" : "zakaat-calculator/disclaimer.html";
+    const privacyLink = isSubdirectory ? "../privacy.html" : "privacy.html";
+    const disclaimerLink = isSubdirectory ? "../disclaimer.html" : "disclaimer.html";
 
     footer.innerHTML = `
         <div class="footer-links">
