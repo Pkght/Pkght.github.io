@@ -4,11 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Islamic Tools - Your Guide to Islamic Practices</title>
+    <title>Quicknisab - Your Guide to Islamic Practices</title>
+
     <meta name="description"
-        content="A collection of free online tools to help you with your Islamic practices. Calculate your Zakat, plan your inheritance, and more.">
+        content="Access free Islamic tools including Zakat calculators, inheritance calculators, Nisab values, and practical guides to help you perform your Islamic duties correctly.">
+
     <meta name="keywords"
-        content="Islamic tools, Zakat calculator, inheritance calculator, Islamic practices, Muslim tools">
+        content="Islamic tools, Zakat calculator, Nisab calculator, inheritance calculator, Muslim tools, Islamic guidance, Islamic practices">
+
     <link rel="stylesheet" href="style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2826469813017365"
         crossorigin="anonymous"></script>
@@ -17,46 +20,92 @@
 <body>
     <div class="app-wrapper">
         <aside class="sidebar">
-            <h2>Islamic Tools</h2>
-            <ul>
-            </ul>
+            <h2>Quicknisab</h2>
+            <ul></ul>
         </aside>
+
         <main class="main-content">
             <div class="container">
-                <h1>Welcome to Islamic Tools</h1>
-                <p>This website provides a collection of free online tools to help you with your Islamic practices.
-                    Whether you need to calculate your Zakat, plan your inheritance, or learn more about Islamic
-                    rituals, we have the tools to assist you.</p>
+
+                <h1>Welcome to Quicknisab</h1>
+
+                <p>
+                    Quicknisab is created to help Muslims carry out their religious duties with clarity,
+                    accuracy, and confidence. Many essential Islamic acts, such as calculating Zakat, determining
+                    the Nisab threshold, or distributing inheritance, require correct knowledge and careful
+                    calculations. This website provides a collection of easy-to-use online tools that simplify
+                    these responsibilities.
+                </p>
+
+                <p>
+                    Our goal is to serve as a reliable companion for Muslims around the world. Each tool is
+                    designed to follow authentic Islamic guidelines, and our explanations are written in simple,
+                    clear language so that anyone can understand them. Whether you are looking to calculate your
+                    yearly Zakat, check the current Nisab value, understand inheritance shares, or explore other
+                    aspects of Islamic teachings, you will find useful tools and helpful information here.
+                </p>
+
+                <p>
+                    We believe that proper knowledge leads to better practice. That’s why every tool includes
+                    short descriptions and guidance to help you understand how and why specific calculations are
+                    made. As the website grows, we will continue adding more tools, articles, and educational 
+                    resources to support you in your Islamic journey.
+                </p>
+
+                <p>
+                    Please explore the tools listed below. We welcome your feedback and suggestions so we can
+                    continue improving and offering the best resources for the global Muslim community.
+                </p>
+
+                <h2>Available Tools</h2>
                 <div id="tool-links"></div>
+
+                <!-- Google AdSense Ad -->
                 <ins class="adsbygoogle" style="display:block; text-align:center;"
-                    data-ad-client="ca-pub-2826469813017365" data-ad-slot="YOUR_UNIQUE_SLOT_NUMBER"
-                    data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    data-ad-client="ca-pub-2826469813017365"
+                    data-ad-slot="YOUR_UNIQUE_SLOT_NUMBER"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
+
+                <h2>About Our Tools</h2>
+                <p>
+                    Each tool on this website is developed after studying authentic Islamic guidelines from
+                    reliable scholars and sources. While our calculators and guides are designed to give accurate
+                    results, every individual situation can be different. For complex or personal matters, we
+                    always recommend consulting a knowledgeable Islamic scholar.
+                </p>
+
             </div>
+        </main>
     </div>
-    </main>
-    </div>
+
     <script src="tools.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const toolLinks = document.getElementById("tool-links");
             tools.forEach(tool => {
                 const link = document.createElement("a");
-                link.href = tool.url.substring(1); // Remove the leading slash
+                link.href = tool.url.substring(1);
                 link.textContent = tool.name;
                 link.style.display = "block";
                 link.style.margin = "10px 0";
+                link.style.fontWeight = "bold";
 
                 const description = document.createElement("p");
                 description.textContent = tool.description;
+                description.style.marginTop = "2px";
+                description.style.marginBottom = "15px";
 
                 toolLinks.appendChild(link);
                 toolLinks.appendChild(description);
             });
         });
     </script>
+
     <script src="script.js"></script>
 </body>
 

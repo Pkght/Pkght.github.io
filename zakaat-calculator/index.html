@@ -5,18 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="A simple and easy-to-use Zakat calculator to help you calculate your annual Zakat.">
-    <meta name="keywords" content="zakat, zakat calculator, islamic finance, charity, islam">
-    <title>Simple Zakat Calculator - QuickNisab.com</title>
+        content="A simple and accurate Zakat calculator to help you calculate your annual Zakat based on Islamic guidelines.">
+    <meta name="keywords" content="zakat, zakat calculator, nisab, gold, silver, islamic calculator, quicknisab">
+    <title>Zakat Calculator - QuickNisab</title>
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2826469813017365"
         crossorigin="anonymous"></script>
+
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Zakat Calculator",
+      "name": "QuickNisab - Zakat Calculator",
       "url": "https://quicknisab.com/zakaat-calculator",
-      "description": "A simple and easy-to-use Zakat calculator to help you calculate your annual Zakat.",
+      "description": "A simple and accurate Zakat calculator to help you calculate your annual Zakat.",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Web",
       "browserRequirements": "Requires JavaScript",
@@ -25,9 +28,10 @@
         "price": "0",
         "priceCurrency": "USD"
       },
-      "featureList": "Calculate Zakat on cash, gold, silver, and investments, Deduct liabilities, Nisab threshold calculation"
+      "featureList": "Calculate Zakat on cash, gold, silver, and investments; Deduct liabilities; Automatic Nisab calculation"
     }
     </script>
+
     <link rel="stylesheet" href="../style.css">
 </head>
 
@@ -35,33 +39,36 @@
 
     <div class="app-wrapper">
         <aside class="sidebar">
-            <h2>Islamic Tools</h2>
-            <ul>
-            </ul>
+            <h2>QuickNisab</h2>
+            <ul></ul>
         </aside>
+
         <main class="main-content">
             <div class="container">
 
+                <!-- AdSense Ad -->
                 <ins class="adsbygoogle" style="display:block; text-align:center;"
                     data-ad-client="ca-pub-2826469813017365" data-ad-slot="YOUR_UNIQUE_SLOT_NUMBER"
                     data-ad-format="auto" data-full-width-responsive="true"></ins>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
-                
+
                 <h1>Zakat Calculator</h1>
-                <p class="subtitle">Enter your assets below. Privacy First: No data leaves your phone.</p>
+                <p class="subtitle">Calculate your Zakat easily. No personal data is stored — calculations happen on your device.</p>
 
                 <div class="content-section">
-                    <h2>What is Zakat?</h2>
-                    <p>Zakat, one of the five pillars of Islam, is an obligatory act of charity that requires Muslims
-                        who meet the necessary criteria of wealth to donate a certain portion of their wealth, typically
-                        2.5%, to eligible recipients. It is a spiritual and social duty that purifies the wealth of the
-                        giver and provides for the needs of the poor and destitute.</p>
-                    <p>This calculator is designed to help you determine the amount of Zakat you owe based on your total
-                        assets and liabilities.</p>
+                    <h2>About This Zakat Calculator</h2>
+                    <p>
+                        Zakat is one of the five pillars of Islam and is an obligation upon Muslims who possess wealth
+                        above the Nisab threshold. It purifies one's wealth and supports the poor and needy.
+                        This calculator helps you determine your exact Zakat amount based on your current assets and liabilities.
+                    </p>
+                    <p>
+                        QuickNisab offers a simple way to calculate Zakat on cash, gold, silver, investments, and other
+                        Zakat-eligible assets while letting you adjust values based on real-time gold and silver prices.
+                    </p>
                 </div>
-
 
                 <h3 class="section-title">Choose Nisab Standard</h3>
                 <div class="form-group">
@@ -108,6 +115,7 @@
 
                 <button onclick="calculateZakat()">Calculate Zakat</button>
 
+                <!-- Mid-page Ad -->
                 <ins class="adsbygoogle" style="display:block; text-align:center;"
                     data-ad-client="ca-pub-2826469813017365" data-ad-slot="YOUR_UNIQUE_SLOT_NUMBER"
                     data-ad-format="auto" data-full-width-responsive="true"></ins>
@@ -127,7 +135,7 @@
                     </div>
 
                     <p style="font-size: 0.9em; color: #555;">
-                        *Nisab automatically adjusts based on your selected standard.
+                        *Nisab updates automatically based on the selected standard.
                     </p>
 
                     <div class="result-row final-zakat">
@@ -136,46 +144,53 @@
                     </div>
 
                     <p id="notEligible" style="color: #c0392b; font-weight: bold; text-align: center; display: none;">
-                        Your net wealth is below the Nisab threshold. No Zakat is due.
+                        Your wealth is below the Nisab threshold. No Zakat is due.
                     </p>
                 </div>
 
-
                 <div class="content-section">
                     <h2>Understanding the Nisab Threshold</h2>
-                    <p>The Nisab is the minimum amount of wealth a Muslim must own before they are obligated to pay
-                        Zakat. If your total net worth is below the Nisab threshold, you are not required to pay Zakat.
-                        The Nisab can be calculated based on the current market value of either gold or silver.</p>
+                    <p>
+                        Nisab is the minimum amount of wealth a Muslim must possess for one lunar year
+                        before Zakat becomes obligatory. It is based on the market value of either gold or silver.
+                    </p>
                     <ul>
-                        <li><strong>Gold Standard:</strong> The Nisab is the equivalent of 87.48 grams of gold.</li>
-                        <li><strong>Silver Standard:</strong> The Nisab is the equivalent of 612.36 grams of silver.
-                        </li>
+                        <li><strong>Gold Nisab:</strong> Equivalent to 87.48 grams of gold.</li>
+                        <li><strong>Silver Nisab:</strong> Equivalent to 612.36 grams of silver.</li>
                     </ul>
-                    <p>This calculator uses the silver standard, which is often recommended by scholars as it results in
-                        a lower threshold, thus allowing for a greater distribution of wealth to the needy.</p>
+                    <p>
+                        Many scholars encourage using the silver standard today because it results in a lower threshold,
+                        enabling more people to qualify for Zakat and increasing support for those in need.
+                    </p>
                 </div>
 
                 <div class="content-section">
                     <h2>Frequently Asked Questions (FAQ)</h2>
                     <div class="faq-item">
-                        <h3>Who is eligible to receive Zakat?</h3>
-                        <p>According to the Quran, Zakat can be distributed to eight categories of people: the poor, the
-                            needy, Zakat collectors, new converts to Islam, to free captives, those in debt, in the
-                            cause of Allah, and to stranded travelers.</p>
+                        <h3>Who can receive Zakat?</h3>
+                        <p>
+                            The Quran lists eight eligible groups, including the poor, the needy, those in debt,
+                            new Muslims, and travelers in hardship.
+                        </p>
                     </div>
+
                     <div class="faq-item">
-                        <h3>What assets are subject to Zakat?</h3>
-                        <p>Zakat is payable on assets such as cash, gold, silver, investments, business inventory, and
-                            rental income. Personal items like your primary home, car, and clothing are generally not
-                            included.</p>
+                        <h3>What assets are Zakatable?</h3>
+                        <p>
+                            Cash, gold, silver, business inventory, investments, and rental income are subject to Zakat.
+                            Personal belongings such as your house, car, and clothing are not.
+                        </p>
                     </div>
+
                     <div class="faq-item">
-                        <h3>When should I pay my Zakat?</h3>
-                        <p>Zakat is paid annually on the wealth that has been in your possession for a full lunar year.
-                            Many Muslims choose to pay their Zakat during the month of Ramadan to reap the multiplied
-                            rewards of giving charity in this blessed month.</p>
+                        <h3>When do I pay my Zakat?</h3>
+                        <p>
+                            Zakat is due once a full lunar year passes on your wealth. Many people pay it during Ramadan
+                            for increased reward, but it may be paid at any time of the year.
+                        </p>
                     </div>
                 </div>
+
             </div>
         </main>
     </div>
@@ -183,6 +198,7 @@
     <script src="../tools.js"></script>
     <script src="../script.js"></script>
     <script src="script.js"></script>
+
 </body>
 
 </html>
