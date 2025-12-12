@@ -4,15 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QuickNisab - Your Guide to Islamic Tools & Calculators</title>
+  <title>Nisab Values — QuickNisab</title>
   <meta name="description"
-    content="QuickNisab provides free Islamic calculators including Zakat calculators, inheritance calculators, Nisab values, and educational guides to help Muslims fulfil their religious duties accurately.">
+    content="Check current Nisab values for Gold and Silver to calculate Zakat according to Islamic guidelines. QuickNisab provides updated thresholds and guidance.">
   <meta name="keywords"
-    content="Islamic tools, Zakat calculator, inheritance calculator, Nisab calculator, Muslim tools, Islamic guidance, Sharia calculators">
+    content="nisab values, gold nisab, silver nisab, zakat threshold, islamic calculator, quicknisab">
 
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2826469813017365"
     crossorigin="anonymous"></script>
 
@@ -102,30 +99,44 @@
     }
 
     h1 {
-      font-size: 1.8rem;
-      margin: 0 0 16px
+      font-size: 1.6rem;
+      margin: 0 0 12px
     }
 
     h2 {
       color: var(--accent);
-      margin-top: 28px
+      margin-top: 24px
     }
 
-    p {
+    .subtitle {
+      color: var(--muted);
       margin-bottom: 12px
     }
 
-    #tool-links a {
-      display: block;
-      font-weight: 600;
-      color: var(--accent);
-      margin-top: 16px;
-      margin-bottom: 4px;
-      text-decoration: none
+    .tool-panel,
+    .content-section {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid #eee
     }
 
-    #tool-links p {
-      margin: 0 0 12px 8px
+    .nisab-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px
+    }
+
+    .nisab-table th,
+    .nisab-table td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left
+    }
+
+    .nisab-table th {
+      background: #f4f7f6
     }
 
     footer {
@@ -150,6 +161,7 @@
 <body>
 
   <div class="app-wrapper">
+
     <aside class="sidebar">
       <h2>QuickNisab</h2>
       <ul>
@@ -164,53 +176,55 @@
 
     <main class="main-content">
       <div class="container">
-        <h1>Welcome to QuickNisab</h1>
 
-        <p>
-          QuickNisab helps Muslims fulfil their religious duties with accuracy and confidence.
-          Many obligations, such as calculating Zakat or distributing inheritance, require careful calculations.
-          Our tools simplify these responsibilities and provide guidance in accordance with Islamic principles.
+        <h1>Nisab Values</h1>
+        <p class="subtitle">
+          Nisab is the minimum wealth threshold a Muslim must reach before Zakat becomes obligatory.
+          Below are the current standard quantities based on Islamic rulings.
         </p>
 
-        <p>
-          The website offers easy-to-use calculators, explanations, and practical guidance.
-          Whether you want to calculate Zakat, check Nisab values, or determine inheritance shares,
-          you will find reliable tools and clear instructions here.
-        </p>
-
-        <p>
-          We continually expand our resources to support the global Muslim community.
-          Your feedback helps us improve and add more helpful tools.
-        </p>
-
-        <!-- AVAILABLE TOOLS -->
-        <h2>Available Tools</h2>
-        <div id="tool-links">
-          <a href="/zakaat-calculator">Zakat Calculator</a>
-          <p>Calculate your annual Zakat based on cash, gold, silver, and investment assets.</p>
-
-          <a href="/inheritance-calculator">Islamic Inheritance Calculator</a>
-          <p>Determine inheritance shares for heirs according to Quranic guidelines (Mirath / Faraid).</p>
+        <div class="content-section">
+          <h2>Gold & Silver Thresholds</h2>
+          <table class="nisab-table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Gold</td>
+                <td>87.48 grams</td>
+                <td>Gold nisab threshold for Zakat obligation</td>
+              </tr>
+              <tr>
+                <td>Silver</td>
+                <td>612.36 grams</td>
+                <td>Silver nisab threshold; widely used to help more people</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
-        <!-- ADSENSE AD -->
-        <ins class="adsbygoogle" style="display:block; text-align:center; margin: 30px 0;"
-          data-ad-client="ca-pub-2826469813017365" data-ad-slot="REPLACE_WITH_REAL_AD_SLOT_ID" data-ad-format="auto"
-          data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        <div class="content-section">
+          <h2>How to Use Nisab Values</h2>
+          <p>
+            1. Multiply the nisab quantity by the current market price per gram in your local currency.<br>
+            2. Compare this total to your net wealth (total assets minus debts).<br>
+            3. If your net wealth is equal to or exceeds the nisab, Zakat becomes obligatory at 2.5%.
+          </p>
+          <p>
+            For accurate calculations, use the <a href="/zakaat-calculator">Zakat Calculator</a>, which computes your
+            net wealth and Zakat automatically.
+          </p>
+        </div>
 
-        <!-- ABOUT SECTION -->
-        <h2>About Our Tools</h2>
-        <p>
-          All tools on QuickNisab are developed after studying authentic Islamic rulings from trusted scholars.
-          While our calculators provide accurate estimates, consult a qualified Islamic scholar for complex or unique
-          cases.
-        </p>
-
-        <!-- FOOTER -->
         <footer>
           <a href="/privacy-policy">Privacy Policy</a> | <a href="/disclaimer">Disclaimer</a>
         </footer>
+
       </div>
     </main>
   </div>

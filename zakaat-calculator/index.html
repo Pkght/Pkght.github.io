@@ -2,203 +2,397 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="A simple and accurate Zakat calculator to help you calculate your annual Zakat based on Islamic guidelines.">
-    <meta name="keywords" content="zakat, zakat calculator, nisab, gold, silver, islamic calculator, quicknisab">
-    <title>Zakat Calculator - QuickNisab</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Zakat Calculator — QuickNisab</title>
+  <meta name="description"
+    content="Accurate, privacy-friendly Zakat calculator with clear explanation of Nisab, examples, and step-by-step guidance. Calculates Zakat on cash, gold, silver and investments." />
+  <meta name="keywords" content="zakat calculator, nisab, zakat guide, islamic zakat, quicknisab" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2826469813017365"
+    crossorigin="anonymous"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Zakat Calculator - QuickNisab",
+  "description": "An explanation-first Zakat calculator with guidance, examples and a privacy-focused calculation that runs entirely in your browser.",
+  "url": "https://quicknisab.com/zakaat-calculator"
+}
+</script>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2826469813017365"
-        crossorigin="anonymous"></script>
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "QuickNisab - Zakat Calculator",
-      "url": "https://quicknisab.com/zakaat-calculator",
-      "description": "A simple and accurate Zakat calculator to help you calculate your annual Zakat.",
-      "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Web",
-      "browserRequirements": "Requires JavaScript",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "featureList": "Calculate Zakat on cash, gold, silver, and investments; Deduct liabilities; Automatic Nisab calculation"
+  <style>
+    :root {
+      --accent: #0b6b4f;
+      --muted: #666;
+      --bg: #fff;
+      --card: #fafafa;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
     }
-    </script>
 
-    <link rel="stylesheet" href="../style.css">
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #111;
+      line-height: 1.5
+    }
+
+    .app-wrapper {
+      display: flex;
+      min-height: 100vh
+    }
+
+    .sidebar {
+      width: 220px;
+      padding: 20px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid #e6e6e6;
+      min-height: 100vh;
+      /* Ensures it stretches full height */
+    }
+
+    .sidebar h2 {
+      margin: 0 0 20px 10px;
+      /* Aligned with link padding */
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .sidebar ul {
+      padding-left: 0;
+      list-style: none;
+      margin: 0;
+    }
+
+    .sidebar li {
+      margin: 4px 0;
+      /* Reduced margin, padding is handled in <a> */
+    }
+
+    .sidebar a {
+      display: block;
+      /* Makes the whole area clickable */
+      padding: 10px 15px;
+      color: #0b4f3d;
+      text-decoration: none;
+      font-weight: 500;
+      border-radius: 8px;
+      /* Soft edges */
+      transition: all 0.2s ease;
+    }
+
+    /* Hover Effect */
+    .sidebar a:hover {
+      background-color: rgba(11, 79, 61, 0.08);
+      /* Light transparent green */
+      transform: translateX(3px);
+      /* Subtle movement */
+    }
+
+    /* The "Lit Up" Active State */
+    .sidebar a.active {
+      background-color: #0b4f3d;
+      color: #ffffff;
+      box-shadow: 0 4px 6px rgba(11, 79, 61, 0.2);
+      /* Soft glow */
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 28px;
+      max-width: 1000px;
+      margin: 0 auto
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 12px
+    }
+
+    h2 {
+      color: var(--accent);
+      margin-top: 24px
+    }
+
+    article.lead {
+      background: var(--card);
+      padding: 18px;
+      border-radius: 8px;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03)
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 8px
+    }
+
+    .tool-panel {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid #eee
+    }
+
+    .form-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px
+    }
+
+    .form-row label {
+      display: block;
+      font-size: 0.9rem;
+      color: #333
+    }
+
+    input[type="number"],
+    select {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      width: 200px
+    }
+
+    button {
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 14px;
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer
+    }
+
+    #result {
+      margin-top: 18px;
+      background: #fbfffb;
+      border-radius: 8px;
+      padding: 12px;
+      border: 1px solid #e6f1ea
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed #eee
+    }
+
+    .result-row:last-child {
+      border-bottom: none
+    }
+
+    footer {
+      margin-top: 36px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center
+    }
+
+    .faq {
+      margin-top: 18px
+    }
+
+    .faq h3 {
+      margin: 12px 0 6px
+    }
+
+    #error {
+      color: red;
+      margin-top: 10px;
+      font-weight: 600
+    }
+
+    @media(max-width:800px) {
+      .sidebar {
+        display: none
+      }
+
+      .main-content {
+        padding: 18px
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="app-wrapper">
 
-    <div class="app-wrapper">
-        <aside class="sidebar">
-            <h2>QuickNisab</h2>
-            <ul></ul>
-        </aside>
+    <aside class="sidebar" aria-label="Main navigation">
+      <h2>QuickNisab</h2>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/zakaat-calculator">Zakat Calculator</a></li>
+        <li><a href="/inheritance-calculator">Inheritance Calculator</a></li>
+        <li><a href="/nisab-values">Nisab Values</a></li>
+        <li><a href="/privacy-policy">Privacy Policy</a></li>
+        <li><a href="/disclaimer">Disclaimer</a></li>
+      </ul>
+    </aside>
 
-        <main class="main-content">
-            <div class="container">
+    <main class="main-content" role="main">
+      <div class="container">
 
-                <!-- AdSense Ad -->
-                <ins class="adsbygoogle" style="display:block; text-align:center;"
-                    data-ad-client="ca-pub-2826469813017365" data-ad-slot="YOUR_UNIQUE_SLOT_NUMBER"
-                    data-ad-format="auto" data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+        <h1>Zakat Calculator</h1>
+        <article class="lead" aria-labelledby="lead-heading">
+          <h2 id="lead-heading">What is Zakat and how this calculator helps</h2>
+          <p>Zakat is a mandatory act of worship and a fixed charity due on qualifying wealth. It purifies wealth and
+            supports those in need. This page explains reasoning, lists commonly Zakatable assets, and gives
+            step-by-step examples before the interactive calculator. All calculations happen locally in your browser.
+          </p>
 
-                <h1>Zakat Calculator</h1>
-                <p class="subtitle">Calculate your Zakat easily. No personal data is stored — calculations happen on your device.</p>
+          <h3>Which assets are usually subject to Zakat?</h3>
+          <p>Cash, business inventory, investments, gold and silver (jewelry may be zakatable depending on local
+            custom), some savings. Personal items used daily are generally not zakatable.</p>
 
-                <div class="content-section">
-                    <h2>About This Zakat Calculator</h2>
-                    <p>
-                        Zakat is one of the five pillars of Islam and is an obligation upon Muslims who possess wealth
-                        above the Nisab threshold. It purifies one's wealth and supports the poor and needy.
-                        This calculator helps you determine your exact Zakat amount based on your current assets and liabilities.
-                    </p>
-                    <p>
-                        QuickNisab offers a simple way to calculate Zakat on cash, gold, silver, investments, and other
-                        Zakat-eligible assets while letting you adjust values based on real-time gold and silver prices.
-                    </p>
-                </div>
+          <h3>Important calculation principles</h3>
+          <ul>
+            <li>Use market value for gold & silver in local currency</li>
+            <li>One lunar year (hawl) for zakat obligation</li>
+            <li>Deduct immediate debts before comparison to nisab</li>
+            <li>Zakat rate is 2.5% of qualifying wealth</li>
+          </ul>
 
-                <h3 class="section-title">Choose Nisab Standard</h3>
-                <div class="form-group">
-                    <label>Select Nisab Type:</label>
-                    <select id="nisabType">
-                        <option value="silver" selected>Silver Standard (612.36g)</option>
-                        <option value="gold">Gold Standard (87.48g)</option>
-                    </select>
-                </div>
+          <h3>Example</h3>
+          <p>Cash = 120,000, gold = 10g, silver = 0g, debts = 20,000, gold price = 25,000 per gram → Net wealth =
+            350,000. Compare to gold-nisab or silver-nisab to see if Zakat is due.</p>
 
-                <h3 class="section-title">Step 1: Current Rates</h3>
-                <div class="form-group">
-                    <label>Current Price of Gold (per Gram)</label>
-                    <input type="number" id="goldRate" placeholder="e.g. 21000">
-                </div>
-                <div class="form-group">
-                    <label>Current Price of Silver (per Gram)</label>
-                    <input type="number" id="silverRate" placeholder="e.g. 250">
-                </div>
+          <h3>Privacy & accuracy</h3>
+          <p>All calculations run in your browser. No data is collected or transmitted. For complex cases, consult a
+            qualified scholar.</p>
+        </article>
 
-                <h3 class="section-title">Step 2: Your Assets</h3>
-                <div class="form-group">
-                    <label>Cash (In Hand & Bank)</label>
-                    <input type="number" id="cash" value="0">
-                </div>
-                <div class="form-group">
-                    <label>Gold Owned (Grams)</label>
-                    <input type="number" id="goldGrams" value="0">
-                </div>
-                <div class="form-group">
-                    <label>Silver Owned (Grams)</label>
-                    <input type="number" id="silverGrams" value="0">
-                </div>
-                <div class="form-group">
-                    <label>Investments & Shares Value</label>
-                    <input type="number" id="investments" value="0">
-                </div>
+        <section class="tool-panel" aria-labelledby="calc-heading">
+          <h2 id="calc-heading">Interactive Zakat Calculator</h2>
 
-                <h3 class="section-title">Step 3: Deductions</h3>
-                <div class="form-group">
-                    <label>Immediate Debts / Loans You Owe</label>
-                    <input type="number" id="debts" value="0">
-                </div>
+          <div id="error"></div>
 
-                <button onclick="calculateZakat()">Calculate Zakat</button>
-
-                <!-- Mid-page Ad -->
-                <ins class="adsbygoogle" style="display:block; text-align:center;"
-                    data-ad-client="ca-pub-2826469813017365" data-ad-slot="YOUR_UNIQUE_SLOT_NUMBER"
-                    data-ad-format="auto" data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-
-                <div id="result">
-                    <div class="result-row">
-                        <span>Total Assets:</span>
-                        <span id="displayTotalAssets">0</span>
-                    </div>
-
-                    <div class="result-row">
-                        <span>Nisab Threshold:</span>
-                        <span id="displayNisab">0</span>
-                    </div>
-
-                    <p style="font-size: 0.9em; color: #555;">
-                        *Nisab updates automatically based on the selected standard.
-                    </p>
-
-                    <div class="result-row final-zakat">
-                        <span>Zakat Payable:</span>
-                        <span id="displayZakat">0</span>
-                    </div>
-
-                    <p id="notEligible" style="color: #c0392b; font-weight: bold; text-align: center; display: none;">
-                        Your wealth is below the Nisab threshold. No Zakat is due.
-                    </p>
-                </div>
-
-                <div class="content-section">
-                    <h2>Understanding the Nisab Threshold</h2>
-                    <p>
-                        Nisab is the minimum amount of wealth a Muslim must possess for one lunar year
-                        before Zakat becomes obligatory. It is based on the market value of either gold or silver.
-                    </p>
-                    <ul>
-                        <li><strong>Gold Nisab:</strong> Equivalent to 87.48 grams of gold.</li>
-                        <li><strong>Silver Nisab:</strong> Equivalent to 612.36 grams of silver.</li>
-                    </ul>
-                    <p>
-                        Many scholars encourage using the silver standard today because it results in a lower threshold,
-                        enabling more people to qualify for Zakat and increasing support for those in need.
-                    </p>
-                </div>
-
-                <div class="content-section">
-                    <h2>Frequently Asked Questions (FAQ)</h2>
-                    <div class="faq-item">
-                        <h3>Who can receive Zakat?</h3>
-                        <p>
-                            The Quran lists eight eligible groups, including the poor, the needy, those in debt,
-                            new Muslims, and travelers in hardship.
-                        </p>
-                    </div>
-
-                    <div class="faq-item">
-                        <h3>What assets are Zakatable?</h3>
-                        <p>
-                            Cash, gold, silver, business inventory, investments, and rental income are subject to Zakat.
-                            Personal belongings such as your house, car, and clothing are not.
-                        </p>
-                    </div>
-
-                    <div class="faq-item">
-                        <h3>When do I pay my Zakat?</h3>
-                        <p>
-                            Zakat is due once a full lunar year passes on your wealth. Many people pay it during Ramadan
-                            for increased reward, but it may be paid at any time of the year.
-                        </p>
-                    </div>
-                </div>
-
+          <div class="form-row">
+            <div>
+              <label for="nisabType">Nisab standard</label>
+              <select id="nisabType" aria-label="Choose nisab standard">
+                <option value="silver" selected>Silver (612.36 g)</option>
+                <option value="gold">Gold (87.48 g)</option>
+              </select>
             </div>
-        </main>
-    </div>
 
-    <script src="../tools.js"></script>
-    <script src="../script.js"></script>
-    <script src="script.js"></script>
+            <div>
+              <label for="goldRate">Gold price (per gram)</label>
+              <input type="number" id="goldRate" placeholder="e.g. 25000" min="0" />
+            </div>
 
+            <div>
+              <label for="silverRate">Silver price (per gram)</label>
+              <input type="number" id="silverRate" placeholder="e.g. 300" min="0" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label for="cash">Cash (in hand & bank)</label>
+              <input type="number" id="cash" value="0" min="0" />
+            </div>
+            <div>
+              <label for="goldGrams">Gold owned (grams)</label>
+              <input type="number" id="goldGrams" value="0" min="0" />
+            </div>
+            <div>
+              <label for="silverGrams">Silver owned (grams)</label>
+              <input type="number" id="silverGrams" value="0" min="0" />
+            </div>
+            <div>
+              <label for="investments">Investments & shares (value)</label>
+              <input type="number" id="investments" value="0" min="0" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div>
+              <label for="debts">Immediate debts / loans</label>
+              <input type="number" id="debts" value="0" min="0" />
+            </div>
+            <div style="align-self:end;">
+              <button id="calcBtn" type="button">Calculate Zakat</button>
+            </div>
+          </div>
+
+          <div id="result" aria-live="polite" style="display:none;">
+            <div class="result-row"><span>Total assets</span><strong id="displayTotalAssets">0</strong></div>
+            <div class="result-row"><span>Nisab threshold</span><strong id="displayNisab">0</strong></div>
+            <div class="result-row"><span>Net after debts</span><strong id="displayNet">0</strong></div>
+            <div class="result-row"><span>Zakat due (2.5%)</span><strong id="displayZakat">0</strong></div>
+            <p id="notEligible" style="color:#b02a37;font-weight:600;display:none">Your net wealth is below the chosen
+              nisab — no Zakat due.</p>
+          </div>
+        </section>
+
+        <footer>
+          <a href="/privacy-policy">Privacy Policy</a> | <a href="/disclaimer">Disclaimer</a>
+        </footer>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function formatNumber(n) { return Number(n).toLocaleString(undefined, { maximumFractionDigits: 2 }) }
+
+    function calculateZakatLocal() {
+      const errorEl = document.getElementById('error');
+      errorEl.textContent = '';
+
+      const nisabType = document.getElementById('nisabType').value;
+      const goldRate = parseFloat(document.getElementById('goldRate').value);
+      const silverRate = parseFloat(document.getElementById('silverRate').value);
+      const cash = parseFloat(document.getElementById('cash').value) || 0;
+      const goldGrams = parseFloat(document.getElementById('goldGrams').value) || 0;
+      const silverGrams = parseFloat(document.getElementById('silverGrams').value) || 0;
+      const investments = parseFloat(document.getElementById('investments').value) || 0;
+      const debts = parseFloat(document.getElementById('debts').value) || 0;
+
+      if ([goldRate, silverRate].some(v => isNaN(v) || v < 0)) {
+        errorEl.textContent = 'Please enter valid positive values for gold and silver rates';
+        return;
+      }
+
+      const goldValue = goldGrams * goldRate;
+      const silverValue = silverGrams * silverRate;
+      const totalAssets = cash + goldValue + silverValue + investments;
+
+      const goldNisab = 87.48 * goldRate;
+      const silverNisab = 612.36 * silverRate;
+      const chosenNisab = nisabType === 'gold' ? goldNisab : silverNisab;
+
+      const net = totalAssets - debts;
+      const zakatDue = (net >= chosenNisab && net > 0) ? (net * 0.025) : 0;
+
+      // Render values
+      document.getElementById('displayTotalAssets').textContent = totalAssets.toLocaleString();
+      document.getElementById('displayNisab').textContent = chosenNisab.toLocaleString();
+      document.getElementById('displayNet').textContent = net.toLocaleString();
+      document.getElementById('displayZakat').textContent = zakatDue.toLocaleString();
+
+      const resultEl = document.getElementById('result');
+      resultEl.style.display = 'block';
+      document.getElementById('notEligible').style.display = (zakatDue === 0) ? 'block' : 'none';
+    }
+
+    document.getElementById('calcBtn').addEventListener('click', calculateZakatLocal);
+
+    document.getElementById('calcBtn').addEventListener('click', calculateZakatLocal);
+    Array.from(document.querySelectorAll('input')).forEach(input => {
+      input.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.preventDefault(); calculateZakatLocal(); }
+      });
+    });
+  </script>
 </body>
 
 </html>

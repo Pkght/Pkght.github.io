@@ -2,170 +2,351 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Calculate Islamic inheritance distribution (Mirath / Faraid) using this easy and accurate online calculator.">
-    <meta name="keywords" content="inheritance calculator, islamic inheritance, mirath, faraid, quicknisab, estate distribution">
-    <title>Islamic Inheritance Calculator - QuickNisab</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Islamic Inheritance Calculator — QuickNisab</title>
+  <meta name="description"
+    content="Calculate Islamic inheritance distribution (Mirath / Faraid) using this easy and accurate online calculator.">
+  <meta name="keywords"
+    content="inheritance calculator, islamic inheritance, mirath, faraid, quicknisab, estate distribution">
 
-    <link rel="stylesheet" href="../style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2826469813017365"
+    crossorigin="anonymous"></script>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2826469813017365"
-        crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --accent: #0b6b4f;
+      --muted: #666;
+      --bg: #fff;
+      --card: #fafafa;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #111;
+      line-height: 1.5
+    }
+
+    .app-wrapper {
+      display: flex;
+      min-height: 100vh
+    }
+
+    .sidebar {
+      width: 220px;
+      padding: 20px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid #e6e6e6;
+      min-height: 100vh;
+      /* Ensures it stretches full height */
+    }
+
+    .sidebar h2 {
+      margin: 0 0 20px 10px;
+      /* Aligned with link padding */
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .sidebar ul {
+      padding-left: 0;
+      list-style: none;
+      margin: 0;
+    }
+
+    .sidebar li {
+      margin: 4px 0;
+      /* Reduced margin, padding is handled in <a> */
+    }
+
+    .sidebar a {
+      display: block;
+      /* Makes the whole area clickable */
+      padding: 10px 15px;
+      color: #0b4f3d;
+      text-decoration: none;
+      font-weight: 500;
+      border-radius: 8px;
+      /* Soft edges */
+      transition: all 0.2s ease;
+    }
+
+    /* Hover Effect */
+    .sidebar a:hover {
+      background-color: rgba(11, 79, 61, 0.08);
+      /* Light transparent green */
+      transform: translateX(3px);
+      /* Subtle movement */
+    }
+
+    /* The "Lit Up" Active State */
+    .sidebar a.active {
+      background-color: #0b4f3d;
+      color: #ffffff;
+      box-shadow: 0 4px 6px rgba(11, 79, 61, 0.2);
+      /* Soft glow */
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 28px;
+      max-width: 1000px;
+      margin: 0 auto
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin: 0 0 12px
+    }
+
+    h2 {
+      color: var(--accent);
+      margin-top: 24px
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 12px
+    }
+
+    .tool-panel {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid #eee
+    }
+
+    .form-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px
+    }
+
+    .form-row label {
+      display: block;
+      font-size: 0.9rem;
+      color: #333
+    }
+
+    input[type="number"],
+    select {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      width: 200px
+    }
+
+    button {
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 14px;
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer
+    }
+
+    #result {
+      display: none;
+      margin-top: 18px;
+      background: #fbfffb;
+      border-radius: 8px;
+      padding: 12px;
+      border: 1px solid #e6f1ea
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed #eee
+    }
+
+    .result-row:last-child {
+      border-bottom: none
+    }
+
+    footer {
+      margin-top: 36px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center
+    }
+
+    @media(max-width:800px) {
+      .sidebar {
+        display: none
+      }
+
+      .main-content {
+        padding: 18px
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="app-wrapper">
 
-        <aside class="sidebar">
-            <h2>QuickNisab</h2>
-            <ul></ul>
-        </aside>
+  <div class="app-wrapper">
+    <aside class="sidebar">
+      <h2>QuickNisab</h2>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/zakaat-calculator">Zakat Calculator</a></li>
+        <li><a href="/inheritance-calculator">Inheritance Calculator</a></li>
+        <li><a href="/nisab-values">Nisab Values</a></li>
+        <li><a href="/privacy-policy">Privacy Policy</a></li>
+        <li><a href="/disclaimer">Disclaimer</a></li>
+      </ul>
+    </aside>
 
-        <main class="main-content">
-            <div class="container">
+    <main class="main-content">
+      <div class="container">
+        <h1>Islamic Inheritance Calculator</h1>
+        <!-- ARTICLE: explanatory content -->
+        <article class="lead">
+          <h2>Understanding Islamic Inheritance (Mirath / Faraid)</h2>
+          <p>
+            Islamic inheritance is a structured system defined in the Quran and Sunnah. It ensures fairness among heirs,
+            protects the rights of family members,
+            and prevents disputes. This calculator estimates fixed shares for primary heirs according to widely accepted
+            rules.
+          </p>
+          <h3>Primary Heirs & Shares</h3>
+          <ul>
+            <li><strong>Husband:</strong> 1/2 if no children, 1/4 if children exist</li>
+            <li><strong>Wife:</strong> 1/4 if no children, 1/8 if children exist</li>
+            <li><strong>Son:</strong> receives twice the share of a daughter</li>
+            <li><strong>Daughter:</strong> single daughter 1/2, two or more share 2/3</li>
+            <li><strong>Father:</strong> 1/6 if children exist, otherwise may take residuary</li>
+            <li><strong>Mother:</strong> 1/6 if children exist, 1/3 if no children</li>
+          </ul>
+          <p>Other relatives may inherit if primary heirs are absent. This tool covers common cases for practical use.
+          </p>
+        </article>
 
-                <!-- AdSense -->
-                <ins class="adsbygoogle" style="display:block; text-align:center;"
-                    data-ad-client="ca-pub-2826469813017365"
-                    data-ad-slot="YOUR_UNIQUE_SLOT_NUMBER"
-                    data-ad-format="auto"
-                    data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+        <!-- TOOL PANEL: calculator -->
+        <section class="tool-panel">
+          <h2>Interactive Inheritance Calculator</h2>
 
-                <h1>Islamic Inheritance Calculator</h1>
-                <p class="subtitle">
-                    Calculate the Islamic inheritance (Mirath / Faraid) for eligible heirs. This tool follows
-                    simplified rules based on commonly applied Islamic principles.
-                </p>
-
-                <div class="content-section">
-                    <h2>Understanding Islamic Inheritance</h2>
-                    <p>
-                        Islamic inheritance, known as <strong>Mirath</strong> or <strong>Faraid</strong>, is a structured system
-                        of wealth distribution defined in the Quran and Sunnah. It ensures fairness, prevents disputes,
-                        and protects the financial rights of family members after someone passes away.
-                    </p>
-                    <p>
-                        QuickNisab’s Inheritance Calculator helps you estimate the fixed shares for primary heirs.
-                        Because real-life situations can be complex, this tool focuses on the most common scenarios.
-                        For unique or advanced cases, we always recommend consulting a qualified Islamic scholar.
-                    </p>
-                </div>
-
-                <h3 class="section-title">Step 1: Estate Details</h3>
-                <div class="form-group">
-                    <label>Total Value of Estate (Assets minus Debts)</label>
-                    <input type="number" id="estateValue" placeholder="e.g., 100000">
-                </div>
-
-                <h3 class="section-title">Step 2: Surviving Heirs</h3>
-                <div class="form-group">
-                    <label for="spouse">Spouse:</label>
-                    <select id="spouse" name="spouse">
-                        <option value="none">None</option>
-                        <option value="husband">Husband</option>
-                        <option value="wife">Wife</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Number of Sons:</label>
-                    <input type="number" id="sons" value="0">
-                </div>
-                <div class="form-group">
-                    <label>Number of Daughters:</label>
-                    <input type="number" id="daughters" value="0">
-                </div>
-                <div class="form-group">
-                    <label for="father">Father Alive?</label>
-                    <select id="father" name="father">
-                        <option value="no">No</option>
-                        <option value="yes">Yes</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="mother">Mother Alive?</label>
-                    <select id="mother" name="mother">
-                        <option value="no">No</option>
-                        <option value="yes">Yes</option>
-                    </select>
-                </div>
-
-                <button onclick="calculateInheritance()">Calculate Inheritance</button>
-
-                <!-- Mid-page Ad -->
-                <ins class="adsbygoogle" style="display:block; text-align:center;"
-                    data-ad-client="ca-pub-2826469813017365"
-                    data-ad-slot="YOUR_UNIQUE_SLOT_NUMBER"
-                    data-ad-format="auto"
-                    data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-
-                <div id="result" style="display: none;">
-                    <h3 class="section-title">Calculated Shares</h3>
-                    <div id="shares"></div>
-                </div>
-
-                <div class="content-section">
-                    <h2>Primary Heirs & Their Quranic Shares</h2>
-                    <p>
-                        Islamic inheritance laws assign specific shares to certain family members. Below are the most common
-                        examples based on the Quranic verses (Surah An-Nisa):
-                    </p>
-                    <ul>
-                        <li><strong>Husband:</strong> 1/2 share if there are no children, 1/4 if there are children.</li>
-                        <li><strong>Wife:</strong> 1/4 share if no children, 1/8 if the deceased has children.</li>
-                        <li><strong>Son:</strong> Receives twice the share of a daughter.</li>
-                        <li><strong>Daughter:</strong> A single daughter receives 1/2; multiple daughters share 2/3.</li>
-                        <li><strong>Father:</strong> Receives 1/6 if there are children.</li>
-                        <li><strong>Mother:</strong> Receives 1/6 if there are children; 1/3 if no children exist.</li>
-                    </ul>
-                    <p>
-                        Additional relatives may also inherit depending on specific circumstances.
-                        Since inheritance can become detailed, this tool simplifies the most frequent cases.
-                    </p>
-                </div>
-
-                <div class="content-section">
-                    <h2>Frequently Asked Questions (FAQ)</h2>
-
-                    <div class="faq-item">
-                        <h3>What is a Wasiyyah (Islamic Will)?</h3>
-                        <p>
-                            A <strong>Wasiyyah</strong> allows a Muslim to allocate up to one-third of their wealth to non-heirs.
-                            The remaining two-thirds must go to the Quranic heirs. Making a Will is highly encouraged in Islam.
-                        </p>
-                    </div>
-
-                    <div class="faq-item">
-                        <h3>Do siblings inherit?</h3>
-                        <p>
-                            Yes, siblings may inherit if certain primary heirs are not present. This calculator focuses on
-                            mainstream cases, so for detailed scenarios, it's recommended to seek scholarly guidance.
-                        </p>
-                    </div>
-
-                    <div class="faq-item">
-                        <h3>Is this calculator 100% accurate?</h3>
-                        <p>
-                            It follows commonly accepted Islamic rules for standard inheritance situations. However, many cases
-                            involve unique conditions. Always confirm final distribution with a qualified Islamic scholar.
-                        </p>
-                    </div>
-
-                </div>
-
+          <div class="form-row">
+            <div>
+              <label for="estateValue">Total Estate Value (assets minus debts)</label>
+              <input type="number" id="estateValue" min="0" value="0">
             </div>
-        </main>
-    </div>
+          </div>
 
-    <script src="../tools.js"></script>
-    <script src="../script.js"></script>
-    <script src="inheritance.js"></script>
+          <h3>Surviving Heirs</h3>
+          <div class="form-row">
+            <div>
+              <label for="spouse">Spouse:</label>
+              <select id="spouse">
+                <option value="none">None</option>
+                <option value="husband">Husband</option>
+                <option value="wife">Wife</option>
+              </select>
+            </div>
+            <div>
+              <label for="sons">Number of Sons:</label>
+              <input type="number" id="sons" min="0" value="0">
+            </div>
+            <div>
+              <label for="daughters">Number of Daughters:</label>
+              <input type="number" id="daughters" min="0" value="0">
+            </div>
+            <div>
+              <label for="father">Father Alive?</label>
+              <select id="father">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+              </select>
+            </div>
+            <div>
+              <label for="mother">Mother Alive?</label>
+              <select id="mother">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-top:10px;">
+            <button id="calcBtn">Calculate Inheritance</button>
+          </div>
+
+          <div id="result">
+            <h3>Calculated Shares</h3>
+            <div id="shares"></div>
+          </div>
+        </section>
+
+        <!-- Mid-page Ad -->
+        <div style="margin-top:20px;">
+          <ins class="adsbygoogle" style="display:block; text-align:center; margin: 20px 0;"
+            data-ad-client="ca-pub-2826469813017365" data-ad-slot="REPLACE_WITH_REAL_AD_SLOT_ID" data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <footer>
+          <a href="/privacy-policy">Privacy Policy</a> | <a href="/disclaimer">Disclaimer</a>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function calculateInheritance() {
+      const estate = parseFloat(document.getElementById('estateValue').value) || 0;
+      const spouse = document.getElementById('spouse').value;
+      const sons = parseInt(document.getElementById('sons').value) || 0;
+      const daughters = parseInt(document.getElementById('daughters').value) || 0;
+      const fatherAlive = document.getElementById('father').value === 'yes';
+      const motherAlive = document.getElementById('mother').value === 'yes';
+
+      if (estate <= 0) {
+        alert('Estate value must be greater than 0');
+        return;
+      }
+
+      let shares = {};
+
+      // Spouse share
+      if (spouse === 'husband') shares['Husband'] = (sons + daughters) === 0 ? 0.5 * estate : 0.25 * estate;
+      if (spouse === 'wife') shares['Wife'] = (sons + daughters) === 0 ? 0.25 * estate : 0.125 * estate;
+
+      // Mother share
+      if (motherAlive) shares['Mother'] = (sons + daughters) === 0 ? 0.333 * estate : 0.1667 * estate;
+
+      // Father share
+      if (fatherAlive) shares['Father'] = (sons + daughters) > 0 ? 0.1667 * estate : 0; // residuary simplification
+
+      // Children share (sons double daughters)
+      if (sons + daughters > 0) {
+        const totalParts = sons * 2 + daughters;
+        const childrenEstate = estate * 0.6667; // approximate remaining after spouse & parents
+        const partValue = childrenEstate / totalParts;
+        if (sons > 0) shares['Sons'] = sons * partValue;
+        if (daughters > 0) shares['Daughters'] = daughters * partValue;
+      }
+
+      // Display results
+      const sharesDiv = document.getElementById('shares');
+      sharesDiv.innerHTML = '';
+      for (const [key, value] of Object.entries(shares)) {
+        sharesDiv.innerHTML += `<div class="result-row"><span>${key}</span><strong>${value.toFixed(2)}</strong></div>`;
+      }
+
+      document.getElementById('result').style.display = 'block';
+    }
+
+    document.getElementById('calcBtn').addEventListener('click', calculateInheritance);
+  </script>
 
 </body>
 
