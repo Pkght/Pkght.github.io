@@ -11,6 +11,7 @@
     content="Islamic tools, Zakat calculator, inheritance calculator, Nisab calculator, Muslim tools, Islamic guidance, Sharia calculators">
 
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2826469813017365"
@@ -30,6 +31,12 @@
       margin: 0 0 12px 8px
     }
 
+    .card-quicknisab {
+      background: var(--card);
+      padding: 18px;
+      border-radius: 8px;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03)
+    }
   </style>
 </head>
 
@@ -51,32 +58,33 @@
     <main class="main-content">
       <div class="container">
         <h1>Welcome to QuickNisab</h1>
+        <div class="card-quicknisab">
+          <p>
+            QuickNisab helps Muslims fulfil their religious duties with accuracy and confidence.
+            Many obligations, such as calculating Zakat or distributing inheritance, require careful calculations.
+            Our tools simplify these responsibilities and provide guidance in accordance with Islamic principles.
+          </p>
 
-        <p>
-          QuickNisab helps Muslims fulfil their religious duties with accuracy and confidence.
-          Many obligations, such as calculating Zakat or distributing inheritance, require careful calculations.
-          Our tools simplify these responsibilities and provide guidance in accordance with Islamic principles.
-        </p>
+          <p>
+            The website offers easy-to-use calculators, explanations, and practical guidance.
+            Whether you want to calculate Zakat, check Nisab values, or determine inheritance shares,
+            you will find reliable tools and clear instructions here.
+          </p>
 
-        <p>
-          The website offers easy-to-use calculators, explanations, and practical guidance.
-          Whether you want to calculate Zakat, check Nisab values, or determine inheritance shares,
-          you will find reliable tools and clear instructions here.
-        </p>
+          <p>
+            We continually expand our resources to support the global Muslim community.
+            Your feedback helps us improve and add more helpful tools.
+          </p>
 
-        <p>
-          We continually expand our resources to support the global Muslim community.
-          Your feedback helps us improve and add more helpful tools.
-        </p>
+          <!-- AVAILABLE TOOLS -->
+          <h2>Available Tools</h2>
+          <div id="tool-links">
+            <a href="/zakaat-calculator">Zakat Calculator</a>
+            <p>Calculate your annual Zakat based on cash, gold, silver, and investment assets.</p>
 
-        <!-- AVAILABLE TOOLS -->
-        <h2>Available Tools</h2>
-        <div id="tool-links">
-          <a href="/zakaat-calculator">Zakat Calculator</a>
-          <p>Calculate your annual Zakat based on cash, gold, silver, and investment assets.</p>
-
-          <a href="/inheritance-calculator">Islamic Inheritance Calculator</a>
-          <p>Determine inheritance shares for heirs according to Quranic guidelines (Mirath / Faraid).</p>
+            <a href="/inheritance-calculator">Islamic Inheritance Calculator</a>
+            <p>Determine inheritance shares for heirs according to Quranic guidelines (Mirath / Faraid).</p>
+          </div>
         </div>
 
         <!-- ADSENSE AD -->
