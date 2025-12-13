@@ -77,6 +77,12 @@
     .result-row:last-child {
       border-bottom: none
     }
+
+    .disclaimer {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 20px;
+    }
   </style>
 </head>
 
@@ -98,36 +104,28 @@
     <main class="main-content">
       <div class="container">
         <h1>Islamic Inheritance Calculator</h1>
-        <!-- ARTICLE: explanatory content -->
+
         <article class="lead">
           <h2>Understanding Islamic Inheritance (Mirath / Faraid)</h2>
           <p>
-            Islamic inheritance is a structured system defined in the Quran and Sunnah. It ensures fairness among heirs,
-            protects the rights of family members,
-            and prevents disputes. This calculator estimates fixed shares for primary heirs according to widely accepted
-            rules.
+            Islamic inheritance follows precise rules from the Quran and Sunnah (Sunni jurisprudence). This updated
+            calculator implements correct fixed shares, residuary distribution, and proportional reduction ('Awl) when
+            shares exceed the estate.
           </p>
-          <h3>Primary Heirs & Shares</h3>
-          <ul>
-            <li><strong>Husband:</strong> 1/2 if no children, 1/4 if children exist</li>
-            <li><strong>Wife:</strong> 1/4 if no children, 1/8 if children exist</li>
-            <li><strong>Son:</strong> receives twice the share of a daughter</li>
-            <li><strong>Daughter:</strong> single daughter 1/2, two or more share 2/3</li>
-            <li><strong>Father:</strong> 1/6 if children exist, otherwise may take residuary</li>
-            <li><strong>Mother:</strong> 1/6 if children exist, 1/3 if no children</li>
-          </ul>
-          <p>Other relatives may inherit if primary heirs are absent. This tool covers common cases for practical use.
+          <p class="disclaimer">
+            <strong>Note:</strong> This is an improved version with more accurate logic for common cases. It covers
+            husband/wife, sons, daughters, father, and mother. For complex scenarios (e.g., siblings, grandparents,
+            multiple wives), consult a qualified Islamic scholar.
           </p>
         </article>
 
-        <!-- TOOL PANEL: calculator -->
         <section class="tool-panel">
           <h2>Interactive Inheritance Calculator</h2>
 
           <div class="form-row">
             <div>
               <label for="estateValue">Total Estate Value (assets minus debts)</label>
-              <input type="number" id="estateValue" min="0" value="0">
+              <input type="number" id="estateValue" min="0" value="100000">
             </div>
           </div>
 
@@ -137,8 +135,8 @@
               <label for="spouse">Spouse:</label>
               <select id="spouse">
                 <option value="none">None</option>
-                <option value="husband">Husband</option>
-                <option value="wife">Wife</option>
+                <option value="husband">Husband (deceased is wife)</option>
+                <option value="wife">Wife (deceased is husband)</option>
               </select>
             </div>
             <div>
@@ -172,10 +170,10 @@
           <div id="result">
             <h3>Calculated Shares</h3>
             <div id="shares"></div>
+            <p class="disclaimer">Results are approximate for educational purposes. Always verify with a scholar.</p>
           </div>
         </section>
 
-        <!-- Mid-page Ad -->
         <div style="margin-top:20px;">
           <ins class="adsbygoogle" style="display:block; text-align:center; margin: 20px 0;"
             data-ad-client="ca-pub-2826469813017365" data-ad-slot="REPLACE_WITH_REAL_AD_SLOT_ID" data-ad-format="auto"
@@ -192,51 +190,165 @@
 
   <script>
     function calculateInheritance() {
-      const estate = parseFloat(document.getElementById('estateValue').value) || 0;
+      const estate = Number(document.getElementById('estateValue').value);
       const spouse = document.getElementById('spouse').value;
-      const sons = parseInt(document.getElementById('sons').value) || 0;
-      const daughters = parseInt(document.getElementById('daughters').value) || 0;
+      const sons = Number(document.getElementById('sons').value);
+      const daughters = Number(document.getElementById('daughters').value);
       const fatherAlive = document.getElementById('father').value === 'yes';
       const motherAlive = document.getElementById('mother').value === 'yes';
 
       if (estate <= 0) {
-        alert('Estate value must be greater than 0');
+        alert("Estate must be greater than zero");
         return;
       }
 
-      let shares = {};
+      const hasChildren = sons + daughters > 0;
+      const hasSons = sons > 0;
 
-      // Spouse share
-      if (spouse === 'husband') shares['Husband'] = (sons + daughters) === 0 ? 0.5 * estate : 0.25 * estate;
-      if (spouse === 'wife') shares['Wife'] = (sons + daughters) === 0 ? 0.25 * estate : 0.125 * estate;
+      let fixedShares = {};   // fractions
+      let results = {};      // money values
 
-      // Mother share
-      if (motherAlive) shares['Mother'] = (sons + daughters) === 0 ? 0.333 * estate : 0.1667 * estate;
+      /* ───── FIXED SHARES ───── */
 
-      // Father share
-      if (fatherAlive) shares['Father'] = (sons + daughters) > 0 ? 0.1667 * estate : 0; // residuary simplification
+      // Spouse
+      if (spouse === 'husband') {
+        fixedShares.Husband = hasChildren ? 1 / 4 : 1 / 2;
+      }
+      if (spouse === 'wife') {
+        fixedShares.Wife = hasChildren ? 1 / 8 : 1 / 4;
+      }
 
-      // Children share (sons double daughters)
-      if (sons + daughters > 0) {
+      // Mother
+      if (motherAlive) {
+        fixedShares.Mother = hasChildren ? 1 / 6 : 1 / 3;
+      }
+
+      // Father (fixed only when children exist)
+      if (fatherAlive && hasChildren) {
+        fixedShares.Father = 1 / 6;
+      }
+
+      // Daughters fixed share (only if no sons)
+      if (!hasSons && daughters > 0) {
+        fixedShares.Daughters = (daughters === 1) ? 1 / 2 : 2 / 3;
+      }
+
+      /* ───── AWL ───── */
+
+      let fixedTotal = Object.values(fixedShares).reduce((a, b) => a + b, 0);
+      let awlDivisor = fixedTotal > 1 ? fixedTotal : 1;
+
+      let allocated = 0;
+
+      /* ───── APPLY FIXED SHARES ───── */
+
+      for (let heir in fixedShares) {
+        let amount = (fixedShares[heir] / awlDivisor) * estate;
+
+        if (heir === 'Daughters') {
+          results["Each Daughter"] = (amount / daughters).toFixed(2);
+          results["Total Daughters"] = amount.toFixed(2);
+        } else {
+          results[heir] = amount.toFixed(2);
+        }
+
+        allocated += amount;
+      }
+
+      /* ───── RESIDUE ───── */
+
+      let residue = estate - allocated;
+
+      // Children as residuary
+      if (residue > 0 && hasSons) {
         const totalParts = sons * 2 + daughters;
-        const childrenEstate = estate * 0.6667; // approximate remaining after spouse & parents
-        const partValue = childrenEstate / totalParts;
-        if (sons > 0) shares['Sons'] = sons * partValue;
-        if (daughters > 0) shares['Daughters'] = daughters * partValue;
+        const partValue = residue / totalParts;
+
+        if (sons > 0) {
+          results["Each Son"] = (partValue * 2).toFixed(2);
+        }
+        if (daughters > 0) {
+          results["Each Daughter (residue)"] = partValue.toFixed(2);
+        }
+
+        residue = 0;
       }
 
-      // Display results
-      const sharesDiv = document.getElementById('shares');
-      sharesDiv.innerHTML = '';
-      for (const [key, value] of Object.entries(shares)) {
-        sharesDiv.innerHTML += `<div class="result-row"><span>${key}</span><strong>${value.toFixed(2)}</strong></div>`;
+      // Father as residuary (no sons)
+      if (residue > 0 && fatherAlive && !hasSons) {
+        results["Father (residue)"] = residue.toFixed(2);
+        residue = 0;
       }
 
-      document.getElementById('result').style.display = 'block';
+      /* ───── RADD (RETURN) ───── */
+      if (residue > 0) {
+        const raddHeirs = Object.keys(fixedShares)
+          .filter(h => h !== 'Husband' && h !== 'Wife');
+
+        if (raddHeirs.length > 0) {
+          let raddTotal = 0;
+          raddHeirs.forEach(h => raddTotal += fixedShares[h]);
+
+          raddHeirs.forEach(h => {
+            let extra = (fixedShares[h] / raddTotal) * residue;
+
+            if (h === 'Daughters') {
+              let total = Number(results["Total Daughters"]) + extra;
+              results["Total Daughters"] = total.toFixed(2);
+              results["Each Daughter"] = (total / daughters).toFixed(2);
+            } else {
+              results[h] = (Number(results[h]) + extra).toFixed(2);
+            }
+          });
+
+          residue = 0;
+        }
+      }
+
+      /* ───── DISPLAY ───── */
+
+      const sharesDiv = document.getElementById("shares");
+      sharesDiv.innerHTML = "";
+
+      let totalShown = 0;
+
+      for (let key in results) {
+
+        sharesDiv.innerHTML += `
+    <div class="result-row">
+      <span>${key}</span>
+      <strong>${results[key]}</strong>
+    </div>`;
+
+        // Count totals correctly
+        if (
+          key.startsWith("Total ") ||           // Total Daughters, Total Sons
+          key === "Father" ||
+          key === "Father (residue)" ||
+          key === "Mother" ||
+          key === "Husband" ||
+          key === "Wife"
+        ) {
+          totalShown += Number(results[key]);
+        }
+
+        // SPECIAL CASE: single son only
+        if (
+          key === "Each Son" &&
+          !("Total Sons" in results)
+        ) {
+          totalShown += Number(results[key]);
+        }
+      }
+      
+      document.getElementById("result").style.display = "block";
+
     }
 
-    document.getElementById('calcBtn').addEventListener('click', calculateInheritance);
+    document.getElementById("calcBtn")
+      .addEventListener("click", calculateInheritance);
   </script>
+
 
 </body>
 
