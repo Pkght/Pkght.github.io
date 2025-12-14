@@ -10,107 +10,469 @@
   <meta name="keywords"
     content="Islamic tools, Zakat calculator, inheritance calculator, Nisab calculator, Muslim tools, Islamic guidance, Sharia calculators">
 
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- Load Tailwind CSS from CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            },
+            accent: {
+              50: '#fdf2f8',
+              100: '#fce7f3',
+              200: '#fbcfe8',
+              300: '#f9a8d4',
+              400: '#f472b6',
+              500: '#ec4899',
+              600: '#db2777',
+              700: '#be185d',
+              800: '#9d174d',
+              900: '#831843',
+            },
+            islamic: {
+              green: '#0a5c36',
+              gold: '#d4af37',
+              teal: '#2a9d8f',
+            }
+          },
+          fontFamily: {
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+            'serif': ['Merriweather', 'Georgia', 'serif'],
+          },
+          boxShadow: {
+            'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+            'card': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+          }
+        }
+      }
+    }
+  </script>
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2826469813017365"
     crossorigin="anonymous"></script>
 
   <style>
-    #tool-links a {
-      display: block;
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Smooth transitions */
+    .transition-all {
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 300ms;
+    }
+
+    /* Active link styling */
+    .active {
+      background-color: #f0f9ff;
+      border-left-color: #0ea5e9;
+      color: #0369a1;
       font-weight: 600;
-      color: var(--accent);
-      margin-top: 16px;
-      margin-bottom: 4px;
-      text-decoration: none
     }
 
-    #tool-links p {
-      margin: 0 0 12px 8px
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
     }
 
-    .card-quicknisab {
-      background: var(--card);
-      padding: 18px;
-      border-radius: 8px;
-      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03)
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
     }
   </style>
 </head>
 
-<body>
-  <nav class="relative h-22 w-full lg:hidden block my-4 shadow-md">
-    <h2 class="mx-8 absolute text-lg">QuickNisab</h2>
-  </nav>
-  <div class="app-wrapper">
-    <aside class="sidebar lg:static absolute lg:w-[250px] w-full lg:block hidden bg-white">
-      <h2 class="mx-8">QuickNisab</h2>
-      <ul>
-        <li><a href="/">Home</a></li> 
-        <li><a href="/zakaat-calculator">Zakat Calculator</a></li>
-        <li><a href="/inheritance-calculator">Inheritance Calculator</a></li>
-        <li><a href="/nisab-values">Nisab Values</a></li>
-        <li><a href="/privacy-policy">Privacy Policy</a></li>
-        <li><a href="/disclaimer">Disclaimer</a></li>
+<body class="bg-gray-50 font-sans text-gray-800">
+  <!-- Mobile Navigation -->
+  <nav class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm py-4 px-6">
+    <div class="flex justify-between items-center">
+      <h1 class="text-xl font-bold text-islamic-green">QuickNisab</h1>
+      <button id="mobile-menu-toggle" class="text-gray-600 hover:text-islamic-green focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div id="mobile-menu" class="hidden mt-4 pb-2">
+      <ul class="space-y-2">
+        <li><a href="/" class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Home</a>
+        </li>
+        <li><a href="/zakaat-calculator"
+            class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Zakat Calculator</a>
+        </li>
+        <li><a href="/inheritance-calculator"
+            class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Inheritance
+            Calculator</a></li>
+        <li><a href="/nisab-values"
+            class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Nisab Values</a></li>
+        <li><a href="/privacy-policy"
+            class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Privacy Policy</a></li>
+        <li><a href="/disclaimer"
+            class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Disclaimer</a></li>
       </ul>
+    </div>
+  </nav>
+
+  <!-- Main App Container -->
+  <div class="flex min-h-screen pt-16 lg:pt-0">
+    <!-- Sticky Sidebar - Hidden on mobile, visible on lg screens -->
+    <aside
+      class="hidden lg:flex flex-col w-64 bg-white border-r border-gray-200 sticky top-0 h-screen overflow-y-auto no-scrollbar">
+      <!-- Sidebar Header -->
+      <div class="p-6 border-b border-gray-100">
+        <h1 class="text-2xl font-bold text-islamic-green">QuickNisab</h1>
+        <p class="text-sm text-gray-500 mt-1">Islamic Tools & Calculators</p>
+      </div>
+
+      <!-- Sidebar Navigation -->
+      <nav class="flex-1 p-4">
+        <ul class="space-y-2">
+          <li>
+            <a href="/"
+              class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                </path>
+              </svg>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="/zakaat-calculator"
+              class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                </path>
+              </svg>
+              Zakat Calculator
+            </a>
+          </li>
+          <li>
+            <a href="/inheritance-calculator"
+              class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+                </path>
+              </svg>
+              Inheritance Calculator
+            </a>
+          </li>
+          <li>
+            <a href="/nisab-values"
+              class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                </path>
+              </svg>
+              Nisab Values
+            </a>
+          </li>
+
+          <div class="pt-6 mt-6 border-t border-gray-100">
+            <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Legal</p>
+            <li>
+              <a href="/privacy-policy"
+                class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                  </path>
+                </svg>
+                Privacy Policy
+              </a>
+            </li>
+            <li>
+              <a href="/disclaimer"
+                class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Disclaimer
+              </a>
+            </li>
+          </div>
+        </ul>
+
+        <!-- Sidebar Footer -->
+        <div class="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-100">
+          <p class="text-sm text-gray-700">
+            <span class="font-semibold text-islamic-green">Need help?</span>
+            <span class="block text-gray-600 text-xs mt-1">Consult a qualified scholar for complex cases.</span>
+          </p>
+        </div>
+      </nav>
     </aside>
 
-    <main class="main-content">
-      <div class="container">
-        <h1>Welcome to QuickNisab</h1>
-        <div class="card-quicknisab">
-          <p>
-            QuickNisab helps Muslims fulfil their religious duties with accuracy and confidence.
-            Many obligations, such as calculating Zakat or distributing inheritance, require careful calculations.
-            Our tools simplify these responsibilities and provide guidance in accordance with Islamic principles.
+    <!-- Main Content Area (Scrollable) -->
+    <main class="flex-1 overflow-y-auto h-screen">
+      <div class="max-w-4xl mx-auto px-4 py-8 lg:px-8">
+        <!-- Hero Section -->
+        <div class="mb-10">
+          <h1 class="text-4xl font-bold text-gray-900 mb-4">Welcome to <span
+              class="text-islamic-green">QuickNisab</span></h1>
+          <p class="text-lg text-gray-600">
+            Your trusted companion for fulfilling Islamic obligations with accuracy and confidence.
           </p>
+        </div>
 
-          <p>
-            The website offers easy-to-use calculators, explanations, and practical guidance.
-            Whether you want to calculate Zakat, check Nisab values, or determine inheritance shares,
-            you will find reliable tools and clear instructions here.
-          </p>
+        <!-- Introduction Card -->
+        <div class="bg-white rounded-2xl shadow-soft p-6 lg:p-8 mb-8 border border-gray-100">
+          <div class="flex items-center mb-6">
+            <div
+              class="w-12 h-12 rounded-full bg-gradient-to-r from-islamic-green to-islamic-teal flex items-center justify-center mr-4">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                </path>
+              </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900">Our Mission</h2>
+          </div>
 
-          <p>
-            We continually expand our resources to support the global Muslim community.
-            Your feedback helps us improve and add more helpful tools.
-          </p>
+          <div class="space-y-4 text-gray-700">
+            <p>
+              QuickNisab helps Muslims fulfil their religious duties with accuracy and confidence.
+              Many obligations, such as calculating Zakat or distributing inheritance, require careful calculations.
+              Our tools simplify these responsibilities and provide guidance in accordance with Islamic principles.
+            </p>
 
-          <!-- AVAILABLE TOOLS -->
-          <h2>Available Tools</h2>
-          <div id="tool-links">
-            <a href="/zakaat-calculator">Zakat Calculator</a>
-            <p>Calculate your annual Zakat based on cash, gold, silver, and investment assets.</p>
+            <p>
+              The website offers easy-to-use calculators, explanations, and practical guidance.
+              Whether you want to calculate Zakat, check Nisab values, or determine inheritance shares,
+              you will find reliable tools and clear instructions here.
+            </p>
 
-            <a href="/inheritance-calculator">Islamic Inheritance Calculator</a>
-            <p>Determine inheritance shares for heirs according to Quranic guidelines (Mirath / Faraid).</p>
+            <p>
+              We continually expand our resources to support the global Muslim community.
+              Your feedback helps us improve and add more helpful tools.
+            </p>
           </div>
         </div>
 
-        <!-- ADSENSE AD -->
-        <ins class="adsbygoogle" style="display:block; text-align:center; margin: 30px 0;"
-          data-ad-client="ca-pub-2826469813017365" data-ad-slot="REPLACE_WITH_REAL_AD_SLOT_ID" data-ad-format="auto"
-          data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        <!-- Available Tools Section -->
+        <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center">
+          <svg class="w-8 h-8 mr-3 text-islamic-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+            </path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+            </path>
+          </svg>
+          Available Tools
+        </h2>
 
-        <!-- ABOUT SECTION -->
-        <h2>About Our Tools</h2>
-        <p>
-          All tools on QuickNisab are developed after studying authentic Islamic rulings from trusted scholars.
-          While our calculators provide accurate estimates, consult a qualified Islamic scholar for complex or unique
-          cases.
-        </p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-10">
+          <!-- Zakat Calculator Card -->
+          <div
+            class="bg-white rounded-xl shadow-card p-6 border border-gray-100 hover:shadow-md transition-all hover:border-islamic-teal">
+            <div class="flex items-start mb-4">
+              <div
+                class="w-10 h-10 rounded-lg bg-gradient-to-r from-islamic-green to-emerald-500 flex items-center justify-center mr-4">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                  </path>
+                </svg>
+              </div>
+              <div>
+                <a href="/zakaat-calculator"
+                  class="text-xl font-bold text-gray-900 hover:text-islamic-green transition-all">Zakat Calculator</a>
+                <p class="text-sm text-gray-500 mt-1">Calculate your annual Zakat obligation</p>
+              </div>
+            </div>
+            <p class="text-gray-700">
+              Calculate your annual Zakat based on cash, gold, silver, and investment assets. Get accurate calculations
+              following Islamic guidelines.
+            </p>
+            <a href="/zakaat-calculator"
+              class="inline-flex items-center mt-4 text-islamic-green font-semibold hover:text-islamic-teal transition-all">
+              Use Calculator
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg>
+            </a>
+          </div>
 
-        <!-- FOOTER -->
-        <footer>
-          <a href="/privacy-policy">Privacy Policy</a> | <a href="/disclaimer">Disclaimer</a>
+          <!-- Inheritance Calculator Card -->
+          <div
+            class="bg-white rounded-xl shadow-card p-6 border border-gray-100 hover:shadow-md transition-all hover:border-islamic-teal">
+            <div class="flex items-start mb-4">
+              <div
+                class="w-10 h-10 rounded-lg bg-gradient-to-r from-islamic-gold to-amber-500 flex items-center justify-center mr-4">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+                  </path>
+                </svg>
+              </div>
+              <div>
+                <a href="/inheritance-calculator"
+                  class="text-xl font-bold text-gray-900 hover:text-islamic-green transition-all">Islamic Inheritance
+                  Calculator</a>
+                <p class="text-sm text-gray-500 mt-1">Distribute inheritance according to Sharia</p>
+              </div>
+            </div>
+            <p class="text-gray-700">
+              Determine inheritance shares for heirs according to Quranic guidelines (Mirath / Faraid). Ensure fair
+              distribution as prescribed in Islamic law.
+            </p>
+            <a href="/inheritance-calculator"
+              class="inline-flex items-center mt-4 text-islamic-green font-semibold hover:text-islamic-teal transition-all">
+              Use Calculator
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3">
+                </path>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- AdSense Ad -->
+        <div class="my-10 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl border border-gray-200">
+          <p class="text-center text-gray-500 text-sm mb-2">Advertisement</p>
+          <ins class="adsbygoogle block text-center" data-ad-client="ca-pub-2826469813017365"
+            data-ad-slot="REPLACE_WITH_REAL_AD_SLOT_ID" data-ad-format="auto" data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- About Section -->
+        <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-6 lg:p-8 mb-10 border border-blue-100">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6">About Our Tools</h2>
+          <div class="space-y-4 text-gray-700">
+            <p>
+              All tools on QuickNisab are developed after studying authentic Islamic rulings from trusted scholars.
+              While our calculators provide accurate estimates, consult a qualified Islamic scholar for complex or
+              unique
+              cases.
+            </p>
+            <p>
+              We prioritize user privacy and do not store any personal data or calculation results. All computations are
+              performed locally in your browser.
+            </p>
+          </div>
+
+          <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white p-4 rounded-lg border border-gray-200">
+              <h3 class="font-bold text-gray-900 mb-2">Authentic Sources</h3>
+              <p class="text-sm text-gray-600">Based on Quran, Hadith, and trusted scholarly opinions</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg border border-gray-200">
+              <h3 class="font-bold text-gray-900 mb-2">Privacy Focused</h3>
+              <p class="text-sm text-gray-600">No data collection, all calculations done locally</p>
+            </div>
+            <div class="bg-white p-4 rounded-lg border border-gray-200">
+              <h3 class="font-bold text-gray-900 mb-2">Free Access</h3>
+              <p class="text-sm text-gray-600">All tools are completely free for the Muslim community</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="pt-8 mt-8 border-t border-gray-200">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+              <h3 class="text-xl font-bold text-islamic-green">QuickNisab</h3>
+              <p class="text-gray-600 text-sm">Islamic Tools & Calculators</p>
+            </div>
+
+            <div class="flex space-x-6">
+              <a href="/privacy-policy" class="text-gray-600 hover:text-islamic-green transition-all">Privacy Policy</a>
+              <a href="/disclaimer" class="text-gray-600 hover:text-islamic-green transition-all">Disclaimer</a>
+            </div>
+          </div>
+
+          <div class="text-center mt-6 pt-6 border-t border-gray-100">
+            <p class="text-sm text-gray-500">© 2025 QuickNisab. All rights reserved. This website provides tools for
+              educational purposes only.</p>
+          </div>
         </footer>
       </div>
     </main>
   </div>
 
+  <!-- JavaScript for Mobile Menu -->
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function (event) {
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuToggle = document.getElementById('mobile-menu-toggle');
+
+      if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+        mobileMenu.classList.add('hidden');
+      }
+    });
+
+    // Set active link based on current page
+    document.addEventListener('DOMContentLoaded', function () {
+      const currentPath = window.location.pathname;
+      const links = document.querySelectorAll('aside a, #mobile-menu a');
+
+      links.forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

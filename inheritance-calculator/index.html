@@ -5,351 +5,989 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Islamic Inheritance Calculator — QuickNisab</title>
-  <link rel="stylesheet" href="../style.css" />
+    <meta name="description"
+    content="Calculate Islamic inheritance distribution (Mirath / Faraid) using this easy and accurate online calculator.">
+  <meta name="keywords"
+    content="inheritance calculator, islamic inheritance, mirath, faraid, quicknisab, estate distribution">
+
+  <!-- Load Tailwind CSS from CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Custom Tailwind Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            },
+            accent: {
+              50: '#fdf2f8',
+              100: '#fce7f3',
+              200: '#fbcfe8',
+              300: '#f9a8d4',
+              400: '#f472b6',
+              500: '#ec4899',
+              600: '#db2777',
+              700: '#be185d',
+              800: '#9d174d',
+              900: '#831843',
+            },
+            islamic: {
+              green: '#0a5c36',
+              gold: '#d4af37',
+              teal: '#2a9d8f',
+              purple: '#6d28d9',
+            }
+          },
+          fontFamily: {
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+            'serif': ['Merriweather', 'Georgia', 'serif'],
+          },
+          boxShadow: {
+            'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+            'card': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+          }
+        }
+      }
+    }
+  </script>
+
   <meta name="description"
     content="Calculate Islamic inheritance distribution (Mirath / Faraid) using this easy and accurate online calculator.">
   <meta name="keywords"
     content="inheritance calculator, islamic inheritance, mirath, faraid, quicknisab, estate distribution">
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2826469813017365"
     crossorigin="anonymous"></script>
 
   <style>
-    .subtitle {
-      color: var(--muted);
-      margin-bottom: 12px
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
     }
 
-    .tool-panel {
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: 8px;
-      background: #fff;
-      border: 1px solid #eee
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
     }
 
-    .form-row {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 12px
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
     }
 
-    .form-row label {
-      display: block;
-      font-size: 0.9rem;
-      color: #333
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
     }
 
-    input[type="number"],
-    select {
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      width: 200px
+    /* Smooth transitions */
+    .transition-all {
+      transition-property: all;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 300ms;
     }
 
-    button {
-      background: var(--accent);
-      color: #fff;
-      padding: 10px 14px;
-      border: 0;
-      border-radius: 8px;
-      cursor: pointer
+    /* Active link styling */
+    .active {
+      background-color: #f0f9ff;
+      border-left-color: #0ea5e9;
+      color: #0369a1;
+      font-weight: 600;
     }
 
-    #result {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
       display: none;
-      margin-top: 18px;
-      background: #fbfffb;
-      border-radius: 8px;
-      padding: 12px;
-      border: 1px solid #e6f1ea
     }
 
-    .result-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px dashed #eee
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
     }
 
-    .result-row:last-child {
-      border-bottom: none
+    /* Focus styles for accessibility */
+    input:focus,
+    select:focus,
+    button:focus {
+      outline: 2px solid #0ea5e9;
+      outline-offset: 2px;
     }
 
-    .disclaimer {
-      font-size: 0.85rem;
-      color: #666;
-      margin-top: 20px;
+    /* Custom animation for results */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
     }
   </style>
 </head>
 
-<body>
+<body class="bg-gray-50 font-sans text-gray-800">
+  <!-- Mobile Navigation -->
+  <nav class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm py-4 px-6">
+    <div class="flex justify-between items-center">
+      <h1 class="text-xl font-bold text-islamic-green">QuickNisab</h1>
+      <button id="mobile-menu-toggle" class="text-gray-600 hover:text-islamic-green focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
 
-  <div class="app-wrapper">
-    <aside class="sidebar">
-      <h2>QuickNisab</h2>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/zakaat-calculator">Zakat Calculator</a></li>
-        <li><a href="/inheritance-calculator">Inheritance Calculator</a></li>
-        <li><a href="/nisab-values">Nisab Values</a></li>
-        <li><a href="/privacy-policy">Privacy Policy</a></li>
-        <li><a href="/disclaimer">Disclaimer</a></li>
+    <!-- Mobile Menu (hidden by default) -->
+    <div id="mobile-menu" class="hidden mt-4 pb-2">
+      <ul class="space-y-2">
+        <li><a href="/" class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Home</a>
+        </li>
+        <li><a href="/zakaat-calculator"
+            class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Zakat Calculator</a>
+        </li>
+        <li><a href="/inheritance-calculator"
+            class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all active">Inheritance
+            Calculator</a></li>
+        <li><a href="/nisab-values"
+            class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Nisab Values</a></li>
+        <li><a href="/privacy-policy"
+            class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Privacy Policy</a></li>
+        <li><a href="/disclaimer"
+            class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Disclaimer</a></li>
       </ul>
+    </div>
+  </nav>
+
+  <!-- Main App Container -->
+  <div class="flex min-h-screen pt-16 lg:pt-0">
+    <!-- Sticky Sidebar - Hidden on mobile, visible on lg screens -->
+    <aside
+      class="hidden lg:flex flex-col w-64 bg-white border-r border-gray-200 sticky top-0 h-screen overflow-y-auto no-scrollbar">
+      <!-- Sidebar Header -->
+      <div class="p-6 border-b border-gray-100">
+        <h1 class="text-2xl font-bold text-islamic-green">QuickNisab</h1>
+        <p class="text-sm text-gray-500 mt-1">Islamic Tools & Calculators</p>
+      </div>
+
+      <!-- Sidebar Navigation -->
+      <nav class="flex-1 p-4">
+        <ul class="space-y-2">
+          <li>
+            <a href="/"
+              class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                </path>
+              </svg>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="/zakaat-calculator"
+              class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                </path>
+              </svg>
+              Zakat Calculator
+            </a>
+          </li>
+          <li>
+            <a href="/inheritance-calculator"
+              class="flex items-center py-3 px-4 rounded-lg active hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+                </path>
+              </svg>
+              Inheritance Calculator
+            </a>
+          </li>
+          <li>
+            <a href="/nisab-values"
+              class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                </path>
+              </svg>
+              Nisab Values
+            </a>
+          </li>
+
+          <div class="pt-6 mt-6 border-t border-gray-100">
+            <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Legal</p>
+            <li>
+              <a href="/privacy-policy"
+                class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                  </path>
+                </svg>
+                Privacy Policy
+              </a>
+            </li>
+            <li>
+              <a href="/disclaimer"
+                class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Disclaimer
+              </a>
+            </li>
+          </div>
+        </ul>
+
+        <!-- Sidebar Footer -->
+        <div class="mt-8 p-4 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-lg border border-purple-100">
+          <p class="text-sm text-gray-700">
+            <span class="font-semibold text-islamic-purple">Inheritance Rules</span>
+            <span class="block text-gray-600 text-xs mt-1">Based on Quranic verses (Surah An-Nisa)</span>
+          </p>
+        </div>
+      </nav>
     </aside>
 
-    <main class="main-content">
-      <div class="container">
-        <h1>Islamic Inheritance Calculator</h1>
-
-        <article class="lead">
-          <h2>Understanding Islamic Inheritance (Mirath / Faraid)</h2>
-          <p>
-            Islamic inheritance follows precise rules from the Quran and Sunnah (Sunni jurisprudence). This updated
-            calculator implements correct fixed shares, residuary distribution, and proportional reduction ('Awl) when
-            shares exceed the estate.
+    <!-- Main Content Area (Scrollable) -->
+    <main class="flex-1 overflow-y-auto h-screen">
+      <div class="max-w-4xl mx-auto px-4 py-8 lg:px-8">
+        <!-- Page Header -->
+        <div class="mb-8">
+          <div class="flex items-center mb-4">
+            <div
+              class="w-12 h-12 rounded-full bg-gradient-to-r from-islamic-purple to-indigo-600 flex items-center justify-center mr-4">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+                </path>
+              </svg>
+            </div>
+            <h1 class="text-3xl lg:text-4xl font-bold text-gray-900">Islamic Inheritance Calculator</h1>
+          </div>
+          <p class="text-lg text-gray-600">
+            Calculate Islamic inheritance distribution (Mirath / Faraid) using this easy and accurate online calculator.
           </p>
-          <p class="disclaimer">
-            <strong>Note:</strong> This is an improved version with more accurate logic for common cases. It covers
-            husband/wife, sons, daughters, father, and mother. For complex scenarios (e.g., siblings, grandparents,
-            multiple wives), consult a qualified Islamic scholar.
-          </p>
-        </article>
+        </div>
 
-        <section class="tool-panel">
-          <h2>Interactive Inheritance Calculator</h2>
+        <!-- Introduction Section -->
+        <section class="bg-white rounded-2xl shadow-soft p-6 lg:p-8 mb-8 border border-gray-100">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Understanding Islamic Inheritance (Mirath / Faraid)</h2>
+          <div class="space-y-4 text-gray-700">
+            <p>
+              Islamic inheritance follows precise rules from the Quran and Sunnah. This updated
+              calculator implements correct fixed shares, residuary distribution, and proportional reduction ('Awl) when
+              shares exceed the estate.
+            </p>
 
-          <div class="form-row">
-            <div>
-              <label for="estateValue">Total Estate Value (assets minus debts)</label>
-              <input type="number" id="estateValue" min="0" value="100000">
+            <div class="mt-6 bg-gradient-to-r from-blue-50 to-cyan-50 p-4 rounded-lg border border-blue-100">
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">Key Principles of Islamic Inheritance</h3>
+              <ul class="space-y-2">
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                    </path>
+                  </svg>
+                  Fixed shares are specified in the Quran (Surah An-Nisa)
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                    </path>
+                  </svg>
+                  Sons receive double the share of daughters
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                    </path>
+                  </svg>
+                  Debts and funeral expenses are paid first
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                    </path>
+                  </svg>
+                  Specific conditions determine fixed share vs residuary
+                </li>
+              </ul>
             </div>
-          </div>
 
-          <h3>Surviving Heirs</h3>
-          <div class="form-row">
-            <div>
-              <label for="spouse">Spouse:</label>
-              <select id="spouse">
-                <option value="none">None</option>
-                <option value="husband">Husband (deceased is wife)</option>
-                <option value="wife">Wife (deceased is husband)</option>
-              </select>
+            <div class="mt-6 bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-lg border border-green-100">
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">Privacy Assurance</h3>
+              <p>All calculations run in your browser. No data is collected or transmitted. Your financial information
+                remains private.</p>
             </div>
-            <div>
-              <label for="sons">Number of Sons:</label>
-              <input type="number" id="sons" min="0" value="0">
-            </div>
-            <div>
-              <label for="daughters">Number of Daughters:</label>
-              <input type="number" id="daughters" min="0" value="0">
-            </div>
-            <div>
-              <label for="father">Father Alive?</label>
-              <select id="father">
-                <option value="no">No</option>
-                <option value="yes">Yes</option>
-              </select>
-            </div>
-            <div>
-              <label for="mother">Mother Alive?</label>
-              <select id="mother">
-                <option value="no">No</option>
-                <option value="yes">Yes</option>
-              </select>
-            </div>
-          </div>
-
-          <div style="margin-top:10px;">
-            <button id="calcBtn">Calculate Inheritance</button>
-          </div>
-
-          <div id="result">
-            <h3>Calculated Shares</h3>
-            <div id="shares"></div>
-            <p class="disclaimer">Results are approximate for educational purposes. Always verify with a scholar.</p>
           </div>
         </section>
 
-        <div style="margin-top:20px;">
-          <ins class="adsbygoogle" style="display:block; text-align:center; margin: 20px 0;"
-            data-ad-client="ca-pub-2826469813017365" data-ad-slot="REPLACE_WITH_REAL_AD_SLOT_ID" data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
+        <!-- Calculator Section -->
+        <section class="bg-white rounded-2xl shadow-soft p-6 lg:p-8 mb-8 border border-gray-100">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Interactive Inheritance Calculator</h2>
+
+          <!-- Estate Value -->
+          <div class="mb-8">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Estate Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label for="estateValue" class="block text-sm font-medium text-gray-700 mb-1">
+                  Total Estate Value (after debts & expenses)
+                </label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <span class="text-gray-500">$</span>
+                  </div>
+                  <input type="number" id="estateValue" min="0" value="100000" step="0.01"
+                    class="w-full pl-8 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-lg" />
+                </div>
+                <p class="text-xs text-gray-500 mt-1">Enter the net value after paying debts and funeral expenses</p>
+              </div>
+
+              <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                <h4 class="font-semibold text-gray-900 mb-2">Estate Distribution Order</h4>
+                <ol class="text-sm text-gray-700 space-y-1">
+                  <li class="flex items-start">
+                    <span class="font-bold mr-2">1.</span>
+                    Debts & funeral expenses
+                  </li>
+                  <li class="flex items-start">
+                    <span class="font-bold mr-2">2.</span>
+                    Wills (up to 1/3 of remaining)
+                  </li>
+                  <li class="flex items-start">
+                    <span class="font-bold mr-2">3.</span>
+                    Fixed Quranic shares
+                  </li>
+                  <li class="flex items-start">
+                    <span class="font-bold mr-2">4.</span>
+                    Residuary distribution
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- Heirs Selection -->
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Surviving Heirs</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+              <!-- Spouse -->
+              <div class="bg-white p-4 rounded-lg border border-gray-200 hover:border-blue-300 transition-all">
+                <label for="spouse" class="block text-sm font-medium text-gray-700 mb-2">
+                  <div class="flex items-center">
+                    <svg class="w-5 h-5 text-gray-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                      </path>
+                    </svg>
+                    Spouse
+                  </div>
+                </label>
+                <select id="spouse"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                  <option value="none">None</option>
+                  <option value="husband">Husband (deceased is wife)</option>
+                  <option value="wife">Wife (deceased is husband)</option>
+                </select>
+              </div>
+
+              <!-- Sons -->
+              <div class="bg-white p-4 rounded-lg border border-gray-200 hover:border-blue-300 transition-all">
+                <label for="sons" class="block text-sm font-medium text-gray-700 mb-2">
+                  <div class="flex items-center">
+                    <svg class="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                    Number of Sons
+                  </div>
+                </label>
+                <input type="number" id="sons" min="0" value="0"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" />
+              </div>
+
+              <!-- Daughters -->
+              <div class="bg-white p-4 rounded-lg border border-gray-200 hover:border-blue-300 transition-all">
+                <label for="daughters" class="block text-sm font-medium text-gray-700 mb-2">
+                  <div class="flex items-center">
+                    <svg class="w-5 h-5 text-pink-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                    Number of Daughters
+                  </div>
+                </label>
+                <input type="number" id="daughters" min="0" value="0"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all" />
+              </div>
+
+              <!-- Father -->
+              <div class="bg-white p-4 rounded-lg border border-gray-200 hover:border-blue-300 transition-all">
+                <label for="father" class="block text-sm font-medium text-gray-700 mb-2">
+                  <div class="flex items-center">
+                    <svg class="w-5 h-5 text-amber-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                    Father Alive?
+                  </div>
+                </label>
+                <select id="father"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                  <option value="no">No</option>
+                  <option value="yes">Yes</option>
+                </select>
+              </div>
+
+              <!-- Mother -->
+              <div class="bg-white p-4 rounded-lg border border-gray-200 hover:border-blue-300 transition-all">
+                <label for="mother" class="block text-sm font-medium text-gray-700 mb-2">
+                  <div class="flex items-center">
+                    <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                    Mother Alive?
+                  </div>
+                </label>
+                <select id="mother"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                  <option value="no">No</option>
+                  <option value="yes">Yes</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Calculate Button -->
+            <div class="mt-6 flex justify-center">
+              <button id="calcBtn"
+                class="px-8 py-3 bg-gradient-to-r from-islamic-purple to-indigo-600 text-white font-semibold rounded-lg hover:from-islamic-purple hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all shadow-md hover:shadow-lg text-lg">
+                Calculate Inheritance Distribution
+              </button>
+            </div>
+          </div>
+
+          <!-- Results Section -->
+          <div id="result"
+            class="mt-8 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl p-6 border border-purple-200 hidden fade-in"
+            aria-live="polite">
+            <div class="flex items-center mb-6">
+              <div
+                class="w-10 h-10 rounded-full bg-gradient-to-r from-islamic-purple to-indigo-600 flex items-center justify-center mr-4">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                  </path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900">Calculated Inheritance Shares</h3>
+            </div>
+
+            <div id="shares" class="space-y-3 mb-6"></div>
+
+            <div class="mt-6 p-4 bg-white rounded-lg border border-purple-200">
+              <p class="text-sm text-gray-600">
+                <strong>Note:</strong> Results are approximate for educational purposes. Islamic inheritance law has
+                many detailed rules and exceptions. Always verify with a qualified Islamic scholar for actual
+                distribution.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- AdSense Ad -->
+        <div class="my-10 p-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl border border-gray-200">
+          <p class="text-center text-gray-500 text-sm mb-2">Advertisement</p>
+          <ins class="adsbygoogle block text-center" data-ad-client="ca-pub-2826469813017365"
+            data-ad-slot="REPLACE_WITH_REAL_AD_SLOT_ID" data-ad-format="auto" data-full-width-responsive="true"></ins>
           <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
 
-        <footer>
-          <a href="/privacy-policy">Privacy Policy</a> | <a href="/disclaimer">Disclaimer</a>
+        <!-- Fixed Shares Guide -->
+        <section class="bg-white rounded-2xl shadow-soft p-6 lg:p-8 mb-8 border border-gray-100">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Fixed Quranic Shares Guide</h2>
+
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr class="bg-gradient-to-r from-purple-50 to-indigo-50">
+                  <th class="text-left py-3 px-4 border-b border-gray-200 font-semibold text-gray-900">Heir</th>
+                  <th class="text-left py-3 px-4 border-b border-gray-200 font-semibold text-gray-900">Fixed Share</th>
+                  <th class="text-left py-3 px-4 border-b border-gray-200 font-semibold text-gray-900">Conditions</th>
+                  <th class="text-left py-3 px-4 border-b border-gray-200 font-semibold text-gray-900">Quranic Reference
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100">
+                <tr class="hover:bg-gray-50 transition-colors">
+                  <td class="py-3 px-4">Husband</td>
+                  <td class="py-3 px-4">1/2</td>
+                  <td class="py-3 px-4 text-sm">If deceased has no children</td>
+                  <td class="py-3 px-4 text-sm text-islamic-purple font-medium">Surah An-Nisa 4:12</td>
+                </tr>
+                <tr class="hover:bg-gray-50 transition-colors">
+                  <td class="py-3 px-4">Husband</td>
+                  <td class="py-3 px-4">1/4</td>
+                  <td class="py-3 px-4 text-sm">If deceased has children</td>
+                  <td class="py-3 px-4 text-sm text-islamic-purple font-medium">Surah An-Nisa 4:12</td>
+                </tr>
+                <tr class="hover:bg-gray-50 transition-colors">
+                  <td class="py-3 px-4">Wife</td>
+                  <td class="py-3 px-4">1/4</td>
+                  <td class="py-3 px-4 text-sm">If deceased has no children</td>
+                  <td class="py-3 px-4 text-sm text-islamic-purple font-medium">Surah An-Nisa 4:12</td>
+                </tr>
+                <tr class="hover:bg-gray-50 transition-colors">
+                  <td class="py-3 px-4">Wife</td>
+                  <td class="py-3 px-4">1/8</td>
+                  <td class="py-3 px-4 text-sm">If deceased has children</td>
+                  <td class="py-3 px-4 text-sm text-islamic-purple font-medium">Surah An-Nisa 4:12</td>
+                </tr>
+                <tr class="hover:bg-gray-50 transition-colors">
+                  <td class="py-3 px-4">Daughter(s)</td>
+                  <td class="py-3 px-4">1/2 (single)<br>2/3 (multiple)</td>
+                  <td class="py-3 px-4 text-sm">If no sons exist</td>
+                  <td class="py-3 px-4 text-sm text-islamic-purple font-medium">Surah An-Nisa 4:11</td>
+                </tr>
+                <tr class="hover:bg-gray-50 transition-colors">
+                  <td class="py-3 px-4">Father</td>
+                  <td class="py-3 px-4">1/6</td>
+                  <td class="py-3 px-4 text-sm">If deceased has children</td>
+                  <td class="py-3 px-4 text-sm text-islamic-purple font-medium">Surah An-Nisa 4:11</td>
+                </tr>
+                <tr class="hover:bg-gray-50 transition-colors">
+                  <td class="py-3 px-4">Mother</td>
+                  <td class="py-3 px-4">1/6</td>
+                  <td class="py-3 px-4 text-sm">If deceased has children or siblings</td>
+                  <td class="py-3 px-4 text-sm text-islamic-purple font-medium">Surah An-Nisa 4:11</td>
+                </tr>
+                <tr class="hover:bg-gray-50 transition-colors">
+                  <td class="py-3 px-4">Mother</td>
+                  <td class="py-3 px-4">1/3</td>
+                  <td class="py-3 px-4 text-sm">If deceased has no children or siblings</td>
+                  <td class="py-3 px-4 text-sm text-islamic-purple font-medium">Surah An-Nisa 4:11</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-6 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-100">
+            <h3 class="font-semibold text-gray-900 mb-2">Understanding 'Awl (Adjustment) and Radd (Return)</h3>
+            <p class="text-sm text-gray-700">
+              <strong>'Awl (Adjustment):</strong> When total fixed shares exceed 1 (100% of estate), all shares are
+              proportionally reduced.<br>
+              <strong>Radd (Return):</strong> When total fixed shares are less than 1, the remainder returns
+              proportionally to eligible heirs (excluding spouse).
+            </p>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="pt-8 mt-8 border-t border-gray-200">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+              <h3 class="text-xl font-bold text-islamic-green">QuickNisab</h3>
+              <p class="text-gray-600 text-sm">Islamic Tools & Calculators</p>
+            </div>
+
+            <div class="flex space-x-6">
+              <a href="/privacy-policy" class="text-gray-600 hover:text-islamic-green transition-all">Privacy Policy</a>
+              <a href="/disclaimer" class="text-gray-600 hover:text-islamic-green transition-all">Disclaimer</a>
+            </div>
+          </div>
+
+          <div class="text-center mt-6 pt-6 border-t border-gray-100">
+            <p class="text-sm text-gray-500">© 2025 QuickNisab. All rights reserved. This tool is for educational
+              purposes only. Consult a qualified scholar for complex inheritance cases.</p>
+          </div>
         </footer>
       </div>
     </main>
   </div>
 
   <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function (event) {
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuToggle = document.getElementById('mobile-menu-toggle');
+
+      if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+        mobileMenu.classList.add('hidden');
+      }
+    });
+
+    // Set active link
+    document.addEventListener('DOMContentLoaded', function () {
+      const links = document.querySelectorAll('aside a, #mobile-menu a');
+      links.forEach(link => {
+        if (link.getAttribute('href') === window.location.pathname) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Islamic Inheritance Calculation Logic (Corrected)
     function calculateInheritance() {
-      const estate = Number(document.getElementById('estateValue').value);
+      const estate = parseFloat(document.getElementById('estateValue').value);
       const spouse = document.getElementById('spouse').value;
-      const sons = Number(document.getElementById('sons').value);
-      const daughters = Number(document.getElementById('daughters').value);
+      const sons = parseInt(document.getElementById('sons').value) || 0;
+      const daughters = parseInt(document.getElementById('daughters').value) || 0;
       const fatherAlive = document.getElementById('father').value === 'yes';
       const motherAlive = document.getElementById('mother').value === 'yes';
 
-      if (estate <= 0) {
-        alert("Estate must be greater than zero");
+      // Validation
+      if (isNaN(estate) || estate <= 0) {
+        showAlert("Please enter a valid estate value greater than zero.", "error");
         return;
       }
 
-      const hasChildren = sons + daughters > 0;
-      const hasSons = sons > 0;
-
-      let fixedShares = {};   // fractions
-      let results = {};      // money values
-
-      /* ───── FIXED SHARES ───── */
-
-      // Spouse
-      if (spouse === 'husband') {
-        fixedShares.Husband = hasChildren ? 1 / 4 : 1 / 2;
-      }
-      if (spouse === 'wife') {
-        fixedShares.Wife = hasChildren ? 1 / 8 : 1 / 4;
-      }
-
-      // Mother
-      if (motherAlive) {
-        fixedShares.Mother = hasChildren ? 1 / 6 : 1 / 3;
-      }
-
-      // Father (fixed only when children exist)
-      if (fatherAlive && hasChildren) {
-        fixedShares.Father = 1 / 6;
-      }
-
-      // Daughters fixed share (only if no sons)
-      if (!hasSons && daughters > 0) {
-        fixedShares.Daughters = (daughters === 1) ? 1 / 2 : 2 / 3;
-      }
-
-      /* ───── AWL ───── */
-
-      let fixedTotal = Object.values(fixedShares).reduce((a, b) => a + b, 0);
-      let awlDivisor = fixedTotal > 1 ? fixedTotal : 1;
-
-      let allocated = 0;
-
-      /* ───── APPLY FIXED SHARES ───── */
-
-      for (let heir in fixedShares) {
-        let amount = (fixedShares[heir] / awlDivisor) * estate;
-
-        if (heir === 'Daughters') {
-          results["Each Daughter"] = (amount / daughters).toFixed(2);
-          results["Total Daughters"] = amount.toFixed(2);
-        } else {
-          results[heir] = amount.toFixed(2);
-        }
-
-        allocated += amount;
-      }
-
-      /* ───── RESIDUE ───── */
-
-      let residue = estate - allocated;
-
-      // Children as residuary
-      if (residue > 0 && hasSons) {
-        const totalParts = sons * 2 + daughters;
-        const partValue = residue / totalParts;
-
-        if (sons > 0) {
-          results["Each Son"] = (partValue * 2).toFixed(2);
-        }
-        if (daughters > 0) {
-          results["Each Daughter (residue)"] = partValue.toFixed(2);
-        }
-
-        residue = 0;
-      }
-
-      // Father as residuary (no sons)
-      if (residue > 0 && fatherAlive && !hasSons) {
-        results["Father (residue)"] = residue.toFixed(2);
-        residue = 0;
-      }
-
-      /* ───── RADD (RETURN) ───── */
-      if (residue > 0) {
-        const raddHeirs = Object.keys(fixedShares)
-          .filter(h => h !== 'Husband' && h !== 'Wife');
-
-        if (raddHeirs.length > 0) {
-          let raddTotal = 0;
-          raddHeirs.forEach(h => raddTotal += fixedShares[h]);
-
-          raddHeirs.forEach(h => {
-            let extra = (fixedShares[h] / raddTotal) * residue;
-
-            if (h === 'Daughters') {
-              let total = Number(results["Total Daughters"]) + extra;
-              results["Total Daughters"] = total.toFixed(2);
-              results["Each Daughter"] = (total / daughters).toFixed(2);
-            } else {
-              results[h] = (Number(results[h]) + extra).toFixed(2);
-            }
-          });
-
-          residue = 0;
+      if (estate > 1000000000) {
+        if (!confirm("You've entered a very large estate value. Continue calculation?")) {
+          return;
         }
       }
 
-      /* ───── DISPLAY ───── */
-
+      // Reset results
       const sharesDiv = document.getElementById("shares");
       sharesDiv.innerHTML = "";
 
-      let totalShown = 0;
+      // Initialize results object
+      let results = {};
+      let totalDistributed = 0;
 
-      for (let key in results) {
+      // Calculate based on Islamic inheritance rules
+      const hasChildren = sons + daughters > 0;
+      const hasSons = sons > 0;
+      const hasDaughters = daughters > 0;
 
-        sharesDiv.innerHTML += `
-    <div class="result-row">
-      <span>${key}</span>
-      <strong>${results[key]}</strong>
-    </div>`;
+      // 1. SPOUSE SHARE
+      if (spouse === 'husband') {
+        results['Husband'] = hasChildren ? estate * (1 / 4) : estate * (1 / 2);
+      } else if (spouse === 'wife') {
+        results['Wife'] = hasChildren ? estate * (1 / 8) : estate * (1 / 4);
+      }
 
-        // Count totals correctly
-        if (
-          key.startsWith("Total ") ||           // Total Daughters, Total Sons
-          key === "Father" ||
-          key === "Father (residue)" ||
-          key === "Mother" ||
-          key === "Husband" ||
-          key === "Wife"
-        ) {
-          totalShown += Number(results[key]);
-        }
+      // 2. MOTHER'S SHARE
+      if (motherAlive) {
+        // Mother gets 1/6 if deceased has children OR has siblings
+        // Mother gets 1/3 if deceased has no children AND no siblings
+        // For simplicity, we'll use 1/6 if has children, 1/3 otherwise
+        results['Mother'] = hasChildren ? estate * (1 / 6) : estate * (1 / 3);
+      }
 
-        // SPECIAL CASE: single son only
-        if (
-          key === "Each Son" &&
-          !("Total Sons" in results)
-        ) {
-          totalShown += Number(results[key]);
+      // 3. FATHER'S SHARE
+      if (fatherAlive) {
+        if (hasChildren) {
+          // Father gets 1/6 when deceased has children
+          results['Father'] = estate * (1 / 6);
+        } else {
+          // Father gets residue when no children exist
+          // We'll calculate this later
         }
       }
-      
-      document.getElementById("result").style.display = "block";
 
+      // 4. DAUGHTERS' SHARE (only if no sons)
+      if (!hasSons && hasDaughters) {
+        if (daughters === 1) {
+          // Single daughter gets 1/2
+          results['Daughter(s)'] = estate * (1 / 2);
+        } else {
+          // Multiple daughters share 2/3
+          results['Daughter(s)'] = estate * (2 / 3);
+        }
+      }
+
+      // Calculate total fixed shares allocated so far
+      let fixedSharesTotal = 0;
+      Object.values(results).forEach(value => {
+        fixedSharesTotal += value;
+      });
+
+      // 5. SONS AND DAUGHTERS AS RESIDUARY HEIRS (when sons exist)
+      let residue = estate - fixedSharesTotal;
+
+      if (hasSons && residue > 0) {
+        // Sons and daughters share residue in ratio 2:1 (son gets double daughter)
+        const totalParts = (sons * 2) + daughters;
+        const partValue = residue / totalParts;
+
+        if (sons > 0) {
+          results['Son(s) (Residue)'] = sons * partValue * 2;
+          if (sons > 1) {
+            results['Each Son'] = partValue * 2;
+          }
+        }
+
+        if (daughters > 0) {
+          results['Daughter(s) (Residue)'] = daughters * partValue;
+          if (daughters > 1) {
+            results['Each Daughter'] = partValue;
+          }
+        }
+
+        // Clear daughter's fixed share if daughters are getting residue
+        if (hasDaughters) {
+          delete results['Daughter(s)'];
+        }
+
+        residue = 0;
+      }
+
+      // 6. FATHER AS RESIDUARY HEIR (when no sons exist)
+      if (!hasSons && fatherAlive && residue > 0) {
+        results['Father (Residue)'] = residue;
+        residue = 0;
+      }
+
+      // 7. Apply 'Awl (proportional reduction) if fixed shares exceed estate
+      let totalAllocated = 0;
+      Object.values(results).forEach(value => {
+        totalAllocated += value;
+      });
+
+      if (totalAllocated > estate) {
+        const reductionFactor = estate / totalAllocated;
+        for (let heir in results) {
+          results[heir] *= reductionFactor;
+        }
+        showAlert("'Awl (Adjustment) applied: Fixed shares exceeded estate, so all shares were proportionally reduced.", "info");
+      }
+
+      // 8. Apply Radd (return) if fixed shares are less than estate and no residuary heirs
+      if (residue > 0 && !hasSons && !fatherAlive) {
+        // Return residue to eligible heirs (excluding spouse)
+        const eligibleHeirs = Object.keys(results).filter(heir =>
+          !['Husband', 'Wife'].includes(heir.split(' ')[0])
+        );
+
+        if (eligibleHeirs.length > 0) {
+          const totalCurrent = eligibleHeirs.reduce((sum, heir) => sum + results[heir], 0);
+          const increaseFactor = (totalCurrent + residue) / totalCurrent;
+
+          eligibleHeirs.forEach(heir => {
+            results[heir] *= increaseFactor;
+          });
+          showAlert("Radd (Return) applied: Excess distributed proportionally to eligible heirs.", "info");
+        }
+      }
+
+      // Format and display results
+      displayResults(results, estate);
     }
 
-    document.getElementById("calcBtn")
-      .addEventListener("click", calculateInheritance);
+    function displayResults(results, estate) {
+      const sharesDiv = document.getElementById("shares");
+      sharesDiv.innerHTML = "";
+
+      let totalDistributed = 0;
+      let rowCount = 0;
+
+      // Display each heir's share
+      for (let heir in results) {
+        const amount = results[heir];
+        totalDistributed += amount;
+
+        const row = document.createElement("div");
+        row.className = `flex justify-between items-center py-3 ${rowCount < Object.keys(results).length - 1 ? 'border-b border-purple-100' : ''}`;
+
+        const nameSpan = document.createElement("span");
+        nameSpan.className = "text-gray-700";
+
+        // Special formatting for certain heirs
+        if (heir.includes('Each')) {
+          nameSpan.className = "text-sm text-gray-600";
+          nameSpan.textContent = heir;
+        } else if (heir.includes('Residue')) {
+          nameSpan.innerHTML = `<span class="text-islamic-purple font-medium">${heir}</span>`;
+        } else {
+          nameSpan.textContent = heir;
+        }
+
+        const amountSpan = document.createElement("strong");
+        amountSpan.className = "text-lg text-gray-900 font-semibold";
+        amountSpan.textContent = formatCurrency(amount);
+
+        if (heir.includes('Residue')) {
+          amountSpan.className = "text-lg text-islamic-purple font-semibold";
+        }
+
+        row.appendChild(nameSpan);
+        row.appendChild(amountSpan);
+        sharesDiv.appendChild(row);
+
+        rowCount++;
+      }
+
+      // Add total distributed row
+      const totalRow = document.createElement("div");
+      totalRow.className = "flex justify-between items-center py-4 mt-4 pt-4 border-t-2 border-purple-200";
+
+      const totalLabel = document.createElement("span");
+      totalLabel.className = "text-gray-900 font-bold text-lg";
+      totalLabel.textContent = "Total Distributed";
+
+      const totalAmount = document.createElement("strong");
+      totalAmount.className = "text-xl text-islamic-green font-bold";
+      totalAmount.textContent = formatCurrency(totalDistributed);
+
+      totalRow.appendChild(totalLabel);
+      totalRow.appendChild(totalAmount);
+      sharesDiv.appendChild(totalRow);
+
+      // Add percentage row if needed
+      if (Math.abs(totalDistributed - estate) > 0.01) {
+        const percentageRow = document.createElement("div");
+        percentageRow.className = "flex justify-between items-center py-2";
+
+        const percentageLabel = document.createElement("span");
+        percentageLabel.className = "text-sm text-gray-600";
+        percentageLabel.textContent = "Percentage of Estate";
+
+        const percentageAmount = document.createElement("span");
+        percentageAmount.className = "text-sm font-medium text-gray-700";
+        const percentage = (totalDistributed / estate * 100).toFixed(2);
+        percentageAmount.textContent = `${percentage}%`;
+
+        percentageRow.appendChild(percentageLabel);
+        percentageRow.appendChild(percentageAmount);
+        sharesDiv.appendChild(percentageRow);
+      }
+
+      // Show results with animation
+      const resultEl = document.getElementById("result");
+      resultEl.classList.remove("hidden");
+      resultEl.classList.add("fade-in");
+
+      // Scroll to results
+      setTimeout(() => {
+        resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
+    }
+
+    function formatCurrency(amount) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(amount);
+    }
+
+    function showAlert(message, type) {
+      // You could implement a toast notification here
+      console.log(`${type.toUpperCase()}: ${message}`);
+    }
+
+    // Event Listeners
+    document.getElementById("calcBtn").addEventListener("click", calculateInheritance);
+
+    // Calculate on Enter key in estate value field
+    document.getElementById("estateValue").addEventListener("keydown", (e) => {
+      if (e.key === 'Enter') {
+        calculateInheritance();
+      }
+    });
+
+    // Add sample scenarios for quick testing
+    document.addEventListener('DOMContentLoaded', function () {
+      // Add sample buttons if needed
+      const sampleContainer = document.createElement('div');
+      sampleContainer.className = 'mt-4 flex flex-wrap gap-2';
+
+      const scenarios = [
+        {
+          label: 'Example 1: Husband + 2 Sons + 1 Daughter',
+          values: { estate: 100000, spouse: 'husband', sons: 2, daughters: 1, father: 'no', mother: 'no' }
+        },
+        {
+          label: 'Example 2: Wife + 1 Son',
+          values: { estate: 100000, spouse: 'wife', sons: 1, daughters: 0, father: 'no', mother: 'no' }
+        },
+        {
+          label: 'Example 3: No Spouse + 3 Daughters',
+          values: { estate: 100000, spouse: 'none', sons: 0, daughters: 3, father: 'no', mother: 'no' }
+        },
+        {
+          label: 'Example 4: Husband + Father + Mother',
+          values: { estate: 100000, spouse: 'husband', sons: 0, daughters: 0, father: 'yes', mother: 'yes' }
+        }
+      ];
+
+      scenarios.forEach(scenario => {
+        const btn = document.createElement('button');
+        btn.className = 'px-3 py-2 text-xs bg-gray-100 hover:bg-gray-200 rounded-lg border border-gray-300 transition-all';
+        btn.textContent = scenario.label;
+        btn.addEventListener('click', () => {
+          document.getElementById('estateValue').value = scenario.values.estate;
+          document.getElementById('spouse').value = scenario.values.spouse;
+          document.getElementById('sons').value = scenario.values.sons;
+          document.getElementById('daughters').value = scenario.values.daughters;
+          document.getElementById('father').value = scenario.values.father;
+          document.getElementById('mother').value = scenario.values.mother;
+          calculateInheritance();
+        });
+        sampleContainer.appendChild(btn);
+      });
+
+      // Insert after the calculate button
+      const calcBtn = document.getElementById('calcBtn');
+      calcBtn.parentNode.insertBefore(sampleContainer, calcBtn.nextSibling);
+    });
   </script>
-
-
 </body>
 
 </html>
