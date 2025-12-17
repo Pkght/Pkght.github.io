@@ -4,11 +4,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QuickNisab - Your Guide to Islamic Tools & Calculators</title>
+  <title>QuickNisab - Islamic Zakat & Inheritance Calculator (Sharia Law)</title>
   <meta name="description"
-    content="QuickNisab provides free Islamic calculators including Zakat calculators, inheritance calculators, Nisab values, and educational guides to help Muslims fulfil their religious duties accurately.">
+    content="Free Islamic Zakat Calculator and Sharia Law Inheritance Calculator (Mirath). Calculate your Zakat and inheritance shares according to Islamic law.">
   <meta name="keywords"
-    content="Islamic tools, Zakat calculator, inheritance calculator, Nisab calculator, Muslim tools, Islamic guidance, Sharia calculators">
+    content="Islamic tools, Zakat calculator, inheritance calculator, Nisab calculator, Muslim tools, Islamic guidance, Sharia calculators, mirath calculator, sharia inheritance, islamic law inheritance">
+
+  <!-- Robots & Canonical -->
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://quicknisab.com/">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://quicknisab.com/">
+  <meta property="og:title" content="QuickNisab - Your Guide to Islamic Tools & Calculators">
+  <meta property="og:description"
+    content="Free Islamic calculators for Zakat, Inheritance, and Nisab values. Accurate tools based on authentic Islamic rulings.">
+  <meta property="og:site_name" content="QuickNisab">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://quicknisab.com/">
+  <meta property="twitter:title" content="QuickNisab - Your Guide to Islamic Tools & Calculators">
+  <meta property="twitter:description"
+    content="Free Islamic calculators for Zakat, Inheritance, and Nisab values. Accurate tools based on authentic Islamic rulings.">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "QuickNisab",
+          "url": "https://quicknisab.com/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://quicknisab.com/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "name": "QuickNisab",
+          "url": "https://quicknisab.com/",
+          "logo": "https://quicknisab.com/logo.png",
+          "sameAs": []
+        }
+      ]
+    }
+  </script>
 
   <!-- Load Tailwind CSS from CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -255,7 +300,7 @@
         <!-- Hero Section -->
         <div class="mb-10">
           <h1 class="text-4xl font-bold text-gray-900 mb-4">Welcome to <span
-              class="text-islamic-green">QuickNisab</span></h1>
+              class="text-islamic-green">QuickNisab</span> - Islamic Tools & Calculators</h1>
           <p class="text-lg text-gray-600">
             Your trusted companion for fulfilling Islamic obligations with accuracy and confidence.
           </p>
@@ -366,7 +411,7 @@
             </div>
             <p class="text-gray-700">
               Determine inheritance shares for heirs according to Quranic guidelines (Mirath / Faraid). Ensure fair
-              distribution as prescribed in Islamic law.
+              distribution as prescribed in the Islamic law of inheritance (Sharia).
             </p>
             <a href="/inheritance-calculator"
               class="inline-flex items-center mt-4 text-islamic-green font-semibold hover:text-islamic-teal transition-all">
