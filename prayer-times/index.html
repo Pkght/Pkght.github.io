@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islamic Prayer Times - Accurate Salah Schedule | QuickNisab</title>
+    <meta name="description"
+        content="Get accurate Islamic prayer times (Salah) for your location. Features Fajr, Dhuhr, Asr, Maghrib, and Isha times with Qibla direction and Hijri date.">
+    <meta name="keywords"
+        content="prayer times, salah times, namaz time, islamic prayer schedule, fajr time, maghrib time, qibla direction">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "QuickNisab Prayer Times",
+        "applicationCategory": "UtilityVariable",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Accurate Islamic prayer times calculator based on geolocation."
+      }
+    </script>
+
+    <!-- Load Tailwind CSS from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        islamic: {
+                            green: '#0a5c36',
+                            gold: '#d4af37',
+                            teal: '#2a9d8f',
+                            amber: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Cookie Consent -->
+    <script src="/public/js/cookie-consent.js"></script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans text-gray-800">
+    <!-- Mobile Navigation -->
+    <nav class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm py-4 px-6">
+        <div class="flex justify-between items-center">
+            <h1 class="text-xl font-bold text-islamic-green">QuickNisab</h1>
+            <button id="mobile-menu-toggle" class="text-gray-600 hover:text-islamic-green focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden mt-4 pb-2">
+            <ul class="space-y-2">
+                <li><a href="/"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Home</a>
+                </li>
+                <li><a href="/zakaat-calculator"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Zakat
+                        Calculator</a></li>
+                <li><a href="/inheritance-calculator"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Inheritance
+                        Calculator</a></li>
+                <li><a href="/nisab-values"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Nisab
+                        Values</a></li>
+                <li><a href="/prayer-times"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all active bg-blue-50">Prayer
+                        Times</a></li>
+                <li><a href="/privacy-policy"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Privacy
+                        Policy</a></li>
+                <li><a href="/disclaimer"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Disclaimer</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main App Container -->
+    <div class="flex min-h-screen pt-16 lg:pt-0">
+        <!-- Sticky Sidebar -->
+        <aside
+            class="hidden lg:flex flex-col w-64 bg-white border-r border-gray-200 sticky top-0 h-screen overflow-y-auto no-scrollbar">
+            <!-- Sidebar Header -->
+            <div class="p-6 border-b border-gray-100">
+                <h1 class="text-2xl font-bold text-islamic-green">QuickNisab</h1>
+                <p class="text-sm text-gray-500 mt-1">Islamic Tools & Calculators</p>
+            </div>
+
+            <!-- Sidebar Navigation -->
+            <nav class="flex-1 p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="/"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/zakaat-calculator"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                            Zakat Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/inheritance-calculator"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+                                </path>
+                            </svg>
+                            Inheritance Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/nisab-values"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                </path>
+                            </svg>
+                            Nisab Values
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/prayer-times"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all active text-blue-700 bg-blue-50 font-semibold">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Prayer Times
+                        </a>
+                    </li>
+
+                    <div class="pt-6 mt-6 border-t border-gray-100">
+                        <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Legal</p>
+                        <li>
+                            <a href="/privacy-policy"
+                                class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                    </path>
+                                </svg>
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/disclaimer"
+                                class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Disclaimer
+                            </a>
+                        </li>
+                    </div>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto h-screen">
+            <div class="max-w-4xl mx-auto px-4 py-8 lg:px-8">
+                <!-- Header -->
+                <div class="mb-8">
+                    <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">Islamic Prayer Times</h1>
+                    <p class="text-gray-600">Accurate daily prayer schedule based on your location.</p>
+                </div>
+
+                <!-- Controls Section -->
+                <section class="bg-white rounded-2xl shadow-soft p-6 mb-8 border border-gray-100">
+                    <div class="flex flex-col md:flex-row gap-4 items-end">
+                        <div class="flex-1 w-full">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                            <div class="flex gap-2">
+                                <button id="locateBtn"
+                                    class="flex-1 bg-islamic-green text-white px-4 py-2 rounded-lg hover:bg-green-800 transition-colors flex items-center justify-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                        </path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                    Use My Location
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex-1 w-full">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Manual Coordinates</label>
+                            <div class="flex gap-2">
+                                <input type="number" id="latInput" placeholder="Latitude" step="any"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-islamic-green focus:border-transparent">
+                                <input type="number" id="lonInput" placeholder="Longitude" step="any"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-islamic-green focus:border-transparent">
+                            </div>
+                        </div>
+                        <button id="getTimesBtn"
+                            class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium h-[42px]">
+                            Get Times
+                        </button>
+                    </div>
+                    <!-- Time Format Toggle -->
+                    <div class="mt-4 flex items-center justify-end">
+                        <span class="mr-3 text-sm font-medium text-gray-700">Time Format:</span>
+                        <div class="bg-gray-200 p-1 rounded-lg inline-flex">
+                            <button id="btn12h"
+                                class="px-3 py-1 rounded-md text-sm font-medium transition-all bg-white shadow-sm text-gray-800">12h</button>
+                            <button id="btn24h"
+                                class="px-3 py-1 rounded-md text-sm font-medium transition-all text-gray-500 hover:text-gray-700">24h</button>
+                        </div>
+                    </div>
+                    <div id="locationStatus" class="mt-2 text-sm text-gray-500"></div>
+                </section>
+
+                <!-- Results Section -->
+                <div id="resultsArea" class="hidden space-y-6">
+                    <!-- Date & Info -->
+                    <div class="bg-gradient-to-r from-islamic-green to-teal-700 rounded-2xl p-6 text-white shadow-lg">
+                        <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+                            <div>
+                                <h2 class="text-2xl font-bold" id="gregorianDate">Loading...</h2>
+                                <p class="text-green-100 mt-1" id="hijriDate">Loading...</p>
+                            </div>
+                            <div class="mt-4 md:mt-0 text-right">
+                                <p class="text-sm text-green-100 uppercase tracking-wide">Next Prayer</p>
+                                <p class="text-xl font-bold" id="nextPrayer">...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prayer Times Grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                        <!-- Cards injected by JS -->
+                        <div class="bg-white p-4 rounded-xl shadow-soft border border-gray-100 text-center">
+                            <p class="text-gray-500 text-sm font-medium">Fajr</p>
+                            <p class="text-xl font-bold text-gray-800 mt-1" id="time-Fajr">--:--</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-soft border border-gray-100 text-center">
+                            <p class="text-gray-500 text-sm font-medium">Sunrise</p>
+                            <p class="text-xl font-bold text-gray-800 mt-1" id="time-Sunrise">--:--</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-soft border border-gray-100 text-center">
+                            <p class="text-gray-500 text-sm font-medium">Dhuhr</p>
+                            <p class="text-xl font-bold text-gray-800 mt-1" id="time-Dhuhr">--:--</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-soft border border-gray-100 text-center">
+                            <p class="text-gray-500 text-sm font-medium">Asr</p>
+                            <p class="text-xl font-bold text-gray-800 mt-1" id="time-Asr">--:--</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-soft border border-gray-100 text-center">
+                            <p class="text-gray-500 text-sm font-medium">Maghrib</p>
+                            <p class="text-xl font-bold text-gray-800 mt-1" id="time-Maghrib">--:--</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-soft border border-gray-100 text-center">
+                            <p class="text-gray-500 text-sm font-medium">Isha</p>
+                            <p class="text-xl font-bold text-gray-800 mt-1" id="time-Isha">--:--</p>
+                        </div>
+                    </div>
+
+                    <!-- Qibla Info -->
+                    <div
+                        class="bg-white rounded-2xl shadow-soft p-6 border border-gray-100 flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Qibla Direction</h3>
+                            <p class="text-gray-600 text-sm" id="qiblaText">Loading...</p>
+                        </div>
+                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-islamic-green" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Error Message -->
+                <div id="errorArea" class="hidden mt-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+                    <p class="font-medium">Error loading prayer times.</p>
+                    <p class="text-sm mt-1" id="errorMsg"></p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const API_KEY = 'F5TjjyLQaiKooUsOLUSUjmdioikrHl81dxF2RxLtRJDZVowx';
+        const locateBtn = document.getElementById('locateBtn');
+        const getTimesBtn = document.getElementById('getTimesBtn');
+        const latInput = document.getElementById('latInput');
+        const lonInput = document.getElementById('lonInput');
+        const statusDiv = document.getElementById('locationStatus');
+        const resultsArea = document.getElementById('resultsArea');
+        const errorArea = document.getElementById('errorArea');
+        const btn12h = document.getElementById('btn12h');
+        const btn24h = document.getElementById('btn24h');
+
+        let currentFormat = '12h'; // Default
+        let prayerData = null; // Store data to re-render on toggle
+
+        // Format Toggle
+        btn12h.addEventListener('click', () => setFormat('12h'));
+        btn24h.addEventListener('click', () => setFormat('24h'));
+
+        function setFormat(fmt) {
+            currentFormat = fmt;
+            if (fmt === '12h') {
+                btn12h.classList.add('bg-white', 'shadow-sm', 'text-gray-800');
+                btn12h.classList.remove('text-gray-500');
+                btn24h.classList.remove('bg-white', 'shadow-sm', 'text-gray-800');
+                btn24h.classList.add('text-gray-500');
+            } else {
+                btn24h.classList.add('bg-white', 'shadow-sm', 'text-gray-800');
+                btn24h.classList.remove('text-gray-500');
+                btn12h.classList.remove('bg-white', 'shadow-sm', 'text-gray-800');
+                btn12h.classList.add('text-gray-500');
+            }
+            if (prayerData) {
+                displayData(prayerData); // Re-render if data exists
+            }
+        }
+
+        // Helper to format time
+        function formatTime(timeStr) {
+            if (currentFormat === '24h') return timeStr;
+
+            // API returns HH:mm (24h)
+            const [hourStr, minStr] = timeStr.split(':');
+            let hour = parseInt(hourStr);
+            const ampm = hour >= 12 ? 'PM' : 'AM';
+
+            hour = hour % 12;
+            hour = hour ? hour : 12; // the hour '0' should be '12'
+
+            return `${hour}:${minStr} ${ampm}`;
+        }
+
+        // Locate Me
+        locateBtn.addEventListener('click', () => {
+            if (!navigator.geolocation) {
+                showError("Geolocation is not supported by your browser.");
+                return;
+            }
+            statusDiv.textContent = "Locating...";
+            navigator.geolocation.getCurrentPosition(success, error, {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            });
+        });
+
+        function success(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            latInput.value = latitude.toFixed(6);
+            lonInput.value = longitude.toFixed(6);
+            statusDiv.textContent = "Location found.";
+            fetchPrayerTimes(latitude, longitude);
+        }
+
+        function error() {
+            statusDiv.textContent = "Unable to retrieve your location.";
+            showError("Unable to retrieve location. Please enter coordinates manually.");
+        }
+
+        // Manual Get
+        getTimesBtn.addEventListener('click', () => {
+            const lat = latInput.value;
+            const lon = lonInput.value;
+            if (lat && lon) {
+                fetchPrayerTimes(lat, lon);
+            } else {
+                showError("Please enter valid latitude and longitude.");
+            }
+        });
+
+        async function fetchPrayerTimes(lat, lon) {
+            statusDiv.textContent = "Fetching prayer times...";
+            errorArea.classList.add('hidden');
+
+            try {
+                // Default method 3 (Muslim World League)
+                const response = await fetch(`https://islamicapi.com/api/v1/prayer-time/?lat=${lat}&lon=${lon}&method=3&api_key=${API_KEY}`);
+                const data = await response.json();
+
+                if (data.code === 200 && data.status === 'success') {
+                    prayerData = data.data; // Store for toggling
+                    displayData(data.data);
+                    resultsArea.classList.remove('hidden');
+                    statusDiv.textContent = "Updated.";
+                } else {
+                    throw new Error(data.message || "Failed to fetch data");
+                }
+            } catch (err) {
+                console.error(err);
+                showError(err.message);
+                statusDiv.textContent = "Error.";
+            }
+        }
+
+        function displayData(data) {
+            // Dates
+            document.getElementById('gregorianDate').textContent = data.date.readable;
+            const hijri = data.date.hijri;
+            document.getElementById('hijriDate').textContent = `${hijri.day} ${hijri.month.en} ${hijri.year} ${hijri.designation.abbreviated}`;
+
+            // Times
+            const times = data.times;
+            document.getElementById('time-Fajr').textContent = formatTime(times.Fajr);
+            document.getElementById('time-Sunrise').textContent = formatTime(times.Sunrise);
+            document.getElementById('time-Dhuhr').textContent = formatTime(times.Dhuhr);
+            document.getElementById('time-Asr').textContent = formatTime(times.Asr);
+            document.getElementById('time-Maghrib').textContent = formatTime(times.Maghrib);
+            document.getElementById('time-Isha').textContent = formatTime(times.Isha);
+
+            // Qibla
+            if (data.qibla) {
+                document.getElementById('qiblaText').textContent = `${data.qibla.direction.degrees}° from North`;
+            }
+
+            // Next Prayer (Simple Logic - can be improved)
+            // Ideally we parse time and compare, for now just placeholder or basic text
+            document.getElementById('nextPrayer').textContent = "Check times below";
+        }
+
+        function showError(msg) {
+            errorArea.classList.remove('hidden');
+            document.getElementById('errorMsg').textContent = msg;
+            resultsArea.classList.add('hidden');
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>
