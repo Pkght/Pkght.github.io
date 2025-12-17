@@ -41,4 +41,9 @@
   <priority>0.80</priority>
 </url>
 
+<url>
+  <loc>https://quicknisab.com/about/</loc>
+  <lastmod>2025-12-17T00:00:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
 </urlset>
