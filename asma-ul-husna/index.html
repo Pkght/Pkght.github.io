@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>99 Names of Allah - Asma-ul-Husna | QuickNisab</title>
+    <meta name="description"
+        content="Read, listen, and learn the 99 Names of Allah (Asma-ul-Husna) with meanings, transliteration, and audio.">
+    <meta name="keywords" content="99 names of allah, asma ul husna, names of god islam, islamic audio, learn 99 names">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "99 Names of Allah - Asma-ul-Husna",
+        "description": "Interactive list of the 99 Names of Allah with audio and meanings."
+      }
+    </script>
+
+    <!-- Load Tailwind CSS from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        islamic: {
+                            green: '#0a5c36',
+                            gold: '#d4af37',
+                            teal: '#2a9d8f',
+                            amber: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'arabic': ['Amiri', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts for Arabic -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Cookie Consent -->
+    <script src="/public/js/cookie-consent.js"></script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .arabic-text {
+            direction: rtl;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans text-gray-800">
+    <!-- Mobile Navigation -->
+    <nav class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm py-4 px-6">
+        <div class="flex justify-between items-center">
+            <h1 class="text-xl font-bold text-islamic-green">QuickNisab</h1>
+            <button id="mobile-menu-toggle" class="text-gray-600 hover:text-islamic-green focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden mt-4 pb-2">
+            <ul class="space-y-2">
+                <li><a href="/"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Home</a>
+                </li>
+                <li><a href="/zakaat-calculator"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Zakat
+                        Calculator</a></li>
+                <li><a href="/inheritance-calculator"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Inheritance
+                        Calculator</a></li>
+                <li><a href="/nisab-values"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Nisab
+                        Values</a></li>
+                <li><a href="/prayer-times"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Prayer
+                        Times</a></li>
+                <li><a href="/asma-ul-husna"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all active bg-blue-50">Asma-ul-Husna</a>
+                </li>
+                <li><a href="/privacy-policy"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Privacy
+                        Policy</a></li>
+                <li><a href="/disclaimer"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Disclaimer</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main App Container -->
+    <div class="flex min-h-screen pt-16 lg:pt-0">
+        <!-- Sticky Sidebar -->
+        <aside
+            class="hidden lg:flex flex-col w-64 bg-white border-r border-gray-200 sticky top-0 h-screen overflow-y-auto no-scrollbar">
+            <!-- Sidebar Header -->
+            <div class="p-6 border-b border-gray-100">
+                <h1 class="text-2xl font-bold text-islamic-green">QuickNisab</h1>
+                <p class="text-sm text-gray-500 mt-1">Islamic Tools & Calculators</p>
+            </div>
+
+            <!-- Sidebar Navigation -->
+            <nav class="flex-1 p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="/"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/zakaat-calculator"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                            Zakat Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/inheritance-calculator"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+                                </path>
+                            </svg>
+                            Inheritance Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/nisab-values"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2 2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                </path>
+                            </svg>
+                            Nisab Values
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/prayer-times"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Prayer Times
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/asma-ul-husna"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all active text-blue-700 bg-blue-50 font-semibold">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                </path>
+                            </svg>
+                            Asma-ul-Husna
+                        </a>
+                    </li>
+
+                    <div class="pt-6 mt-6 border-t border-gray-100">
+                        <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Legal & Info
+                        </p>
+                        <li>
+                            <a href="/about"
+                                class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                About Us
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/privacy-policy"
+                                class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                    </path>
+                                </svg>
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/disclaimer"
+                                class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Disclaimer
+                            </a>
+                        </li>
+                    </div>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 overflow-y-auto h-screen">
+            <div class="max-w-6xl mx-auto px-4 py-8 lg:px-8">
+                <!-- Header -->
+                <div class="mb-8 text-center lg:text-left">
+                    <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">99 Names of Allah</h1>
+                    <p class="text-gray-600">The beautiful names of Allah (Asma-ul-Husna) with meanings and audio.</p>
+                </div>
+
+                <!-- Status/Error -->
+                <div id="statusArea" class="hidden mb-6 p-4 rounded-lg"></div>
+
+                <!-- Names Grid -->
+                <div id="namesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+                    dir="rtl">
+                    <!-- Loading skeleton -->
+                    <div
+                        class="animate-pulse bg-white p-6 rounded-2xl shadow-soft border border-gray-100 min-h-[160px]">
+                    </div>
+                    <div
+                        class="animate-pulse bg-white p-6 rounded-2xl shadow-soft border border-gray-100 min-h-[160px]">
+                    </div>
+                    <div
+                        class="animate-pulse bg-white p-6 rounded-2xl shadow-soft border border-gray-100 min-h-[160px]">
+                    </div>
+                    <div
+                        class="animate-pulse bg-white p-6 rounded-2xl shadow-soft border border-gray-100 min-h-[160px]">
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <footer class="pt-8 mt-12 border-t border-gray-200">
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                        <div class="mb-4 md:mb-0">
+                            <h3 class="text-xl font-bold text-islamic-green">QuickNisab</h3>
+                            <p class="text-gray-600 text-sm">Islamic Tools & Calculators</p>
+                        </div>
+                        <div class="flex space-x-6">
+                            <a href="/privacy-policy"
+                                class="text-gray-600 hover:text-islamic-green transition-all">Privacy
+                                Policy</a>
+                            <a href="/disclaimer"
+                                class="text-gray-600 hover:text-islamic-green transition-all">Disclaimer</a>
+                            <a href="/about" class="text-gray-600 hover:text-islamic-green transition-all">About Us</a>
+                        </div>
+                    </div>
+                    <div class="text-center mt-6 pt-6 border-t border-gray-100">
+                        <p class="text-sm text-gray-500">© 2025 QuickNisab. All rights reserved.</p>
+                    </div>
+                </footer>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const API_KEY = 'F5TjjyLQaiKooUsOLUSUjmdioikrHl81dxF2RxLtRJDZVowx';
+        const namesGrid = document.getElementById('namesGrid');
+        const statusArea = document.getElementById('statusArea');
+        let currentlyPlaying = null;
+
+        // Fetch Names on Load
+        document.addEventListener('DOMContentLoaded', fetchNames);
+
+        let allNamesData = []; // Store fetched names for sequential access
+        let isAutoPlaying = false;
+        let currentAutoPlayIndex = 0;
+
+        async function fetchNames() {
+            try {
+                const response = await fetch(`https://islamicapi.com/api/v1/asma-ul-husna/?language=en&api_key=${API_KEY}`);
+                const data = await response.json();
+
+                if (data.code === 200 && data.status === 'success') {
+                    allNamesData = data.data.names;
+                    renderNames(allNamesData);
+                    setupAutoPlayControls();
+                } else {
+                    throw new Error(data.message || "Failed to load names");
+                }
+            } catch (err) {
+                console.error(err);
+                showStatus(err.message || "Unable to load the names. Please try again later.", 'error');
+            }
+        }
+
+        function setupAutoPlayControls() {
+            const fab = document.createElement('button');
+            fab.id = 'autoPlayFab';
+            fab.className = 'fixed bottom-8 right-8 z-50 w-16 h-16 rounded-full bg-islamic-green text-white shadow-lg hover:shadow-xl hover:bg-green-700 transition-all transform hover:scale-105 flex items-center justify-center group';
+            // Accessible label
+            fab.setAttribute('aria-label', 'Play All Names');
+            fab.title = "Play All";
+
+            fab.innerHTML = `
+                <div class="relative w-8 h-8 flex items-center justify-center">
+                    <!-- Play Icon -->
+                    <svg id="fabPlayIcon" class="w-8 h-8 absolute transition-opacity duration-300 transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                    <!-- Stop Icon -->
+                    <svg id="fabStopIcon" class="w-8 h-8 absolute transition-opacity duration-300 opacity-0 transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M6 6h12v12H6z"/>
+                    </svg>
+                </div>
+            `;
+
+            document.body.appendChild(fab);
+            fab.addEventListener('click', toggleAutoPlay);
+        }
+
+        function toggleAutoPlay() {
+            if (isAutoPlaying) {
+                stopAutoPlay();
+            } else {
+                startAutoPlay();
+            }
+        }
+
+        function startAutoPlay() {
+            if (allNamesData.length === 0) return;
+
+            isAutoPlaying = true;
+            currentAutoPlayIndex = 0;
+
+            updateAutoPlayUI(true);
+            playNextInSequence();
+        }
+
+        function stopAutoPlay() {
+            isAutoPlaying = false;
+            // Stop current audio logic
+            if (currentlyPlaying) {
+                currentlyPlaying.pause();
+                currentlyPlaying.currentTime = 0;
+                // Reset unique card button
+                const btn = currentlyPlaying.parentElement.querySelector('.play-btn');
+                if (btn) resetBtn(btn);
+            }
+            currentlyPlaying = null;
+            updateAutoPlayUI(false);
+        }
+
+        function updateAutoPlayUI(playing) {
+            const fab = document.getElementById('autoPlayFab');
+            const playIcon = document.getElementById('fabPlayIcon');
+            const stopIcon = document.getElementById('fabStopIcon');
+
+            if (playing) {
+                fab.classList.remove('bg-islamic-green', 'hover:bg-green-700');
+                fab.classList.add('bg-red-500', 'hover:bg-red-600');
+                fab.title = "Stop Auto Play";
+                fab.setAttribute('aria-label', 'Stop Auto Play');
+
+                playIcon.classList.add('opacity-0');
+                stopIcon.classList.remove('opacity-0');
+            } else {
+                fab.classList.remove('bg-red-500', 'hover:bg-red-600');
+                fab.classList.add('bg-islamic-green', 'hover:bg-green-700');
+                fab.title = "Play All";
+                fab.setAttribute('aria-label', 'Play All Names');
+
+                playIcon.classList.remove('opacity-0');
+                stopIcon.classList.add('opacity-0');
+            }
+        }
+
+        function playNextInSequence() {
+            if (!isAutoPlaying || currentAutoPlayIndex >= allNamesData.length) {
+                stopAutoPlay();
+                return;
+            }
+
+            // Find the card for the current index
+            // We can assume the order in DOM matches the array order
+            const cards = namesGrid.children;
+            if (currentAutoPlayIndex < cards.length) {
+                const card = cards[currentAutoPlayIndex];
+                const btn = card.querySelector('.play-btn');
+                const audio = card.querySelector('audio');
+
+                // Scroll to card
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Play
+                toggleAudio(audio, btn, true); // Pass true to indicate auto sequence
+            }
+        }
+
+        function renderNames(names) {
+            namesGrid.innerHTML = ''; // Clear skeletons
+
+            names.forEach(name => {
+                const card = document.createElement('div');
+                // Ensure card content remains LTR despite the grid being RTL
+                card.setAttribute('dir', 'ltr');
+                card.className = 'bg-white p-6 rounded-2xl shadow-soft border border-gray-100 hover:shadow-lg transition-shadow duration-300 flex flex-col items-center text-center group relative';
+
+                let audioUrl = name.audio;
+                if (audioUrl && audioUrl.startsWith('/')) {
+                    audioUrl = `https://islamicapi.com${audioUrl}`;
+                }
+
+                card.innerHTML = `
+                    <div class="w-12 h-12 rounded-full bg-islamic-green/10 text-islamic-green flex items-center justify-center font-bold text-lg mb-4">
+                        ${name.number}
+                    </div>
+                    <h2 class="text-3xl font-arabic mb-2 text-gray-900 group-hover:text-islamic-green transition-colors">${name.name}</h2>
+                    <p class="text-lg font-bold text-gray-800 mb-1">${name.transliteration}</p>
+                    <p class="text-islamic-green font-medium mb-3">${name.translation}</p>
+                    <p class="text-sm text-gray-500 leading-relaxed mb-4">${name.meaning}</p>
+                    
+                    <button class="mt-auto flex items-center gap-2 px-4 py-2 rounded-full bg-gray-50 hover:bg-islamic-green hover:text-white transition-all text-sm font-medium text-gray-600 play-btn" data-audio="${audioUrl}">
+                        <svg class="w-4 h-4 play-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <svg class="w-4 h-4 pause-icon hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        <span>Listen</span>
+                    </button>
+                    <audio src="${audioUrl}" preload="none"></audio>
+                `;
+
+                const btn = card.querySelector('.play-btn');
+                const audio = card.querySelector('audio');
+
+                btn.addEventListener('click', () => {
+                    // If user manually clicks, stop auto play
+                    if (isAutoPlaying) {
+                        stopAutoPlay();
+                    }
+                    toggleAudio(audio, btn);
+                });
+
+                namesGrid.appendChild(card);
+            });
+        }
+
+        function toggleAudio(audio, btn, fromAutoPlay = false) {
+            const playIcon = btn.querySelector('.play-icon');
+            const pauseIcon = btn.querySelector('.pause-icon');
+            const label = btn.querySelector('span');
+
+            // Prevent stacking if something else is playing
+            if (currentlyPlaying && currentlyPlaying !== audio) {
+                currentlyPlaying.pause();
+                currentlyPlaying.currentTime = 0;
+                const prevBtn = currentlyPlaying.parentElement.querySelector('.play-btn');
+                if (prevBtn) resetBtn(prevBtn);
+            }
+
+            if (audio.paused) {
+                audio.play();
+                currentlyPlaying = audio;
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                label.textContent = "Pause";
+                btn.classList.add('bg-islamic-green', 'text-white');
+                btn.classList.remove('bg-gray-50', 'text-gray-600');
+            } else {
+                audio.pause();
+                currentlyPlaying = null;
+                resetBtn(btn);
+            }
+
+            audio.onended = () => {
+                resetBtn(btn);
+                currentlyPlaying = null;
+
+                if (fromAutoPlay && isAutoPlaying) {
+                    currentAutoPlayIndex++;
+                    playNextInSequence();
+                } else if (isAutoPlaying) {
+                    // Check if this was the auto-playing track that just finished naturally
+                    // Actually, if fromAutoPlay is false (manual interaction) we stopped auto play already.
+                    // So we only care if we are still in auto play mode.
+                    // But wait, if user manually pauses, isAutoPlaying is reset.
+                    // If user manually plays another, toggleAudio is called with fromAutoPlay=false.
+                }
+            };
+        }
+
+        function resetBtn(btn) {
+            const playIcon = btn.querySelector('.play-icon');
+            const pauseIcon = btn.querySelector('.pause-icon');
+            const label = btn.querySelector('span');
+
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            label.textContent = "Listen";
+            btn.classList.remove('bg-islamic-green', 'text-white');
+            btn.classList.add('bg-gray-50', 'text-gray-600');
+        }
+
+        function showStatus(msg, type) {
+            statusArea.textContent = msg;
+            statusArea.classList.remove('hidden');
+            if (type === 'error') {
+                statusArea.classList.add('bg-red-50', 'text-red-700', 'border', 'border-red-200');
+            } else {
+                statusArea.classList.add('bg-blue-50', 'text-blue-700');
+            }
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>
