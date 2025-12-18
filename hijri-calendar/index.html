@@ -501,14 +501,7 @@
                          ${isJummah ? '<span class="inline-block w-2 h-2 rounded-full bg-islamic-green absolute bottom-2 right-2" title="Jumu\'ah"></span>' : ''}
                         
                         <!-- Holidays/Special Days could go here -->
-                         ${day.hijri.holidays.length > 0 ?
-                        `<div class="hidden group-hover:block absolute left-0 right-0 bottom-0 bg-islamic-amber/90 text-white text-[10px] p-1 text-center truncate">
-                                ${day.hijri.holidays.join(', ')}
-                             </div>`
-                        : ''}
-                         ${day.hijri.holidays.length > 0 ?
-                        `<div class="absolute bottom-2 left-2 w-1.5 h-1.5 rounded-full bg-islamic-amber md:hidden"></div>`
-                        : ''}
+
                     </div>
                 `;
                 calendarGrid.appendChild(dayEl);
