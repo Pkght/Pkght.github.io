@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hijri Calendar 1446-1447 | QuickNisab</title>
+    <meta name="description"
+        content="Current Hijri Calendar with Gregorian dates. View Islamic months, important dates, and holidays.">
+    <meta name="keywords"
+        content="hijri calendar, islamic calendar, 1446 AH, 1447 AH, gregorian to hijri, islamic dates, ramadan dates">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Hijri Calendar",
+      "applicationCategory": "UtilityApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0"
+      },
+      "description": "View the current Islamic Hijri Calendar along with Gregorian dates."
+    }
+  </script>
+
+    <!-- Load Tailwind CSS from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        islamic: {
+                            green: '#0a5c36',
+                            gold: '#d4af37',
+                            teal: '#2a9d8f',
+                            amber: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'serif': ['Merriweather', 'Georgia', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Active link styling */
+        .active {
+            background-color: #f0f9ff;
+            border-left-color: #0ea5e9;
+            color: #0369a1;
+            font-weight: 600;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans text-gray-800">
+    <!-- Mobile Navigation -->
+    <nav class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm py-4 px-6">
+        <div class="flex justify-between items-center">
+            <h1 class="text-xl font-bold text-islamic-green">QuickNisab</h1>
+            <button id="mobile-menu-toggle" class="text-gray-600 hover:text-islamic-green focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden mt-4 pb-2">
+            <ul class="space-y-2">
+                <li><a href="/"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Home</a>
+                </li>
+                <li><a href="/zakaat-calculator"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Zakat
+                        Calculator</a></li>
+                <li><a href="/inheritance-calculator"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Inheritance
+                        Calculator</a></li>
+                <li><a href="/nisab-values"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Nisab
+                        Values</a></li>
+                <li><a href="/hijri-calendar"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all active">Hijri
+                        Calendar</a></li>
+                <li><a href="/prayer-times"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Prayer
+                        Times</a></li>
+                <li><a href="/asma-ul-husna"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Asma-ul-Husna</a>
+                </li>
+                <li><a href="/about"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">About Us</a>
+                </li>
+                <li><a href="/privacy-policy"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Privacy
+                        Policy</a></li>
+                <li><a href="/disclaimer"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Disclaimer</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main App Container -->
+    <div class="flex min-h-screen pt-16 lg:pt-0">
+        <!-- Sidebar -->
+        <aside
+            class="hidden lg:flex flex-col w-64 bg-white border-r border-gray-200 sticky top-0 h-screen overflow-y-auto no-scrollbar">
+            <div class="p-6 border-b border-gray-100">
+                <h1 class="text-2xl font-bold text-islamic-green">QuickNisab</h1>
+                <p class="text-sm text-gray-500 mt-1">Islamic Tools & Calculators</p>
+            </div>
+
+            <nav class="flex-1 p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="/"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/zakaat-calculator"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                            Zakat Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/inheritance-calculator"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+                                </path>
+                            </svg>
+                            Inheritance Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/nisab-values"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                </path>
+                            </svg>
+                            Nisab Values
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/hijri-calendar"
+                            class="flex items-center py-3 px-4 rounded-lg active hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            Hijri Calendar
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/prayer-times"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Prayer Times
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/asma-ul-husna"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                </path>
+                            </svg>
+                            Asma-ul-Husna
+                        </a>
+                    </li>
+                    <div class="pt-6 mt-6 border-t border-gray-100">
+                        <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Legal & Info
+                        </p>
+                        <li>
+                            <a href="/about"
+                                class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                About Us
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/privacy-policy"
+                                class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                    </path>
+                                </svg>
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/disclaimer"
+                                class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Disclaimer
+                            </a>
+                        </li>
+                    </div>
+                </ul>
+
+                <!-- Sidebar Footer -->
+                <div class="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                    <p class="text-sm text-gray-700">
+                        <span class="font-semibold text-islamic-green">Need help?</span>
+                        <span class="block text-gray-600 text-xs mt-1">Consult a qualified scholar for complex
+                            cases.</span>
+                    </p>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-y-auto h-screen">
+            <div class="max-w-6xl mx-auto px-4 py-8 lg:px-8">
+                <!-- Header -->
+                <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">Hijri Calendar</h1>
+                        <p class="text-gray-600">Islamic Hijri dates with corresponding Gregorian calendar.</p>
+                    </div>
+                    <div class="mt-4 md:mt-0 flex flex-col sm:flex-row gap-3">
+                        <div class="inline-flex rounded-lg border border-gray-300 bg-white p-1">
+                            <button id="prevMonthBtn"
+                                class="px-4 py-2 hover:bg-gray-100 rounded-md text-gray-700 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="px-4 py-2 border-l border-r border-gray-200 min-w-[140px] text-center font-semibold text-gray-800"
+                                id="currentMonthDisplay">
+                                Loading...
+                            </div>
+                            <button id="nextMonthBtn"
+                                class="px-4 py-2 hover:bg-gray-100 rounded-md text-gray-700 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <button id="todayBtn"
+                            class="px-4 py-2 bg-islamic-green text-white rounded-lg hover:bg-green-800 transition-colors font-medium">
+                            Jump to Today
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Calendar Grid -->
+                <div class="bg-white rounded-xl shadow-soft border border-gray-200 overflow-hidden">
+                    <!-- Days Header -->
+                    <div class="grid grid-cols-7 bg-gray-50 border-b border-gray-200">
+                        <div class="py-3 text-center text-sm font-semibold text-gray-600">Sun</div>
+                        <div class="py-3 text-center text-sm font-semibold text-gray-600">Mon</div>
+                        <div class="py-3 text-center text-sm font-semibold text-gray-600">Tue</div>
+                        <div class="py-3 text-center text-sm font-semibold text-gray-600">Wed</div>
+                        <div class="py-3 text-center text-sm font-semibold text-gray-600">Thu</div>
+                        <div class="py-3 text-center text-sm font-semibold text-islamic-green">Fri</div>
+                        <div class="py-3 text-center text-sm font-semibold text-gray-600">Sat</div>
+                    </div>
+
+                    <!-- Days Container -->
+                    <div id="calendarGrid" class="grid grid-cols-7 min-h-[400px]">
+                        <!-- Days will be injected here via JS -->
+                        <div class="col-span-7 flex items-center justify-center p-12 text-gray-500">
+                            <div class="flex flex-col items-center">
+                                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-islamic-green mb-4">
+                                </div>
+                                <p>Loading calendar data...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="mt-4 flex flex-col md:flex-row justify-between items-start md:items-center text-sm text-gray-500 bg-blue-50 p-4 rounded-lg border border-blue-100">
+                    <p class="mb-2 md:mb-0">
+                        <span class="font-semibold text-blue-800">Note:</span> Islamic dates are subject to moon
+                        sighting and may vary by ±1 day.
+                    </p>
+                    <p>Source: Aladhan API</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Calendar State
+        let currentDate = new Date();
+        let displayMonth = currentDate.getMonth() + 1; // 1-12
+        let displayYear = currentDate.getFullYear();
+        let currentHijriMonthData = null;
+
+        // Elements
+        const calendarGrid = document.getElementById('calendarGrid');
+        const currentMonthDisplay = document.getElementById('currentMonthDisplay');
+        const prevMonthBtn = document.getElementById('prevMonthBtn');
+        const nextMonthBtn = document.getElementById('nextMonthBtn');
+        const todayBtn = document.getElementById('todayBtn');
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Event Listeners
+        prevMonthBtn.addEventListener('click', () => {
+            changeMonth(-1);
+        });
+
+        nextMonthBtn.addEventListener('click', () => {
+            changeMonth(1);
+        });
+
+        todayBtn.addEventListener('click', () => {
+            currentDate = new Date();
+            displayMonth = currentDate.getMonth() + 1;
+            displayYear = currentDate.getFullYear();
+            fetchAndRenderCalendar(displayMonth, displayYear);
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchAndRenderCalendar(displayMonth, displayYear);
+        });
+
+        function changeMonth(delta) {
+            displayMonth += delta;
+            if (displayMonth > 12) {
+                displayMonth = 1;
+                displayYear++;
+            } else if (displayMonth < 1) {
+                displayMonth = 12;
+                displayYear--;
+            }
+            fetchAndRenderCalendar(displayMonth, displayYear);
+        }
+
+        async function fetchAndRenderCalendar(month, year) {
+            setLoadingState(true);
+            try {
+                // Using 'calendar' endpoint which takes year/month and requires coordinates
+                const response = await fetch(`http://api.aladhan.com/v1/calendar/${year}/${month}?latitude=21.4225&longitude=39.8262&method=3`);
+                const data = await response.json();
+
+                if (data.code === 200) {
+                    currentHijriMonthData = data.data;
+                    renderCalendar(data.data, month, year);
+                } else {
+                    showError('Failed to load calendar data.');
+                }
+            } catch (error) {
+                console.error('Error fetching calendar:', error);
+                showError('Network error. Please try again.');
+            } finally {
+                setLoadingState(false);
+            }
+        }
+
+        function renderCalendar(days, month, year) {
+            calendarGrid.innerHTML = '';
+
+            if (!days || days.length === 0) return;
+
+            // Get first day of the month to calculate padding
+            // Aladhan 'calendar' endpoint structure: day.date.gregorian
+            const firstDayData = days[0];
+            const [gDay, gMonth, gYear] = firstDayData.date.gregorian.date.split('-');
+            // JS Date month is 0-indexed
+            const firstDateObj = new Date(gYear, gMonth - 1, gDay);
+            const startDayIndex = firstDateObj.getDay(); // 0 (Sun) to 6 (Sat)
+
+            // Update Header Title (Month Name Year)
+            // Using the first day's hijri month name
+            const hijriMonthName = firstDayData.date.hijri.month.en;
+            const hijriYear = firstDayData.date.hijri.year;
+            currentMonthDisplay.textContent = `${hijriMonthName} ${hijriYear}`;
+
+            // Add Empty Cells for days before start of month
+            for (let i = 0; i < startDayIndex; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'h-24 md:h-32 bg-gray-50/50 border-r border-b border-gray-100';
+                calendarGrid.appendChild(emptyCell);
+            }
+
+            // Render Days
+            const today = new Date();
+            const isCurrentMonth = today.getMonth() + 1 === month && today.getFullYear() === year;
+
+            days.forEach(dayItem => {
+                const day = dayItem.date; // Extract the date object
+                const dayEl = document.createElement('div');
+                const isToday = isCurrentMonth && parseInt(day.gregorian.day) === today.getDate();
+
+                dayEl.className = `relative h-24 md:h-32 border-r border-b border-gray-100 p-2 hover:bg-gray-50 transition-colors flex flex-col justify-between group ${isToday ? 'bg-amber-50 hover:bg-amber-100' : ''}`;
+
+                // Highlight Friday (Jumu'ah) - Simple check based on gregorian weekday
+                const dayOfWeek = day.gregorian.weekday.en;
+                const isJummah = dayOfWeek === "Friday";
+
+                dayEl.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <span class="text-xl md:text-2xl font-bold ${isJummah ? 'text-islamic-green' : isToday ? 'text-amber-700' : 'text-gray-800'}">
+                            ${day.hijri.day}
+                        </span>
+                        <span class="text-xs font-semibold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">
+                            ${parseInt(day.gregorian.day)}
+                        </span>
+                    </div>
+                    <div class="mt-1">
+                        <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wide truncate">
+                           ${day.gregorian.month.en}
+                        </p>
+                         ${isJummah ? '<span class="inline-block w-2 h-2 rounded-full bg-islamic-green absolute bottom-2 right-2" title="Jumu\'ah"></span>' : ''}
+                        
+                        <!-- Holidays/Special Days could go here -->
+                         ${day.hijri.holidays.length > 0 ?
+                        `<div class="hidden group-hover:block absolute left-0 right-0 bottom-0 bg-islamic-amber/90 text-white text-[10px] p-1 text-center truncate">
+                                ${day.hijri.holidays.join(', ')}
+                             </div>`
+                        : ''}
+                         ${day.hijri.holidays.length > 0 ?
+                        `<div class="absolute bottom-2 left-2 w-1.5 h-1.5 rounded-full bg-islamic-amber md:hidden"></div>`
+                        : ''}
+                    </div>
+                `;
+                calendarGrid.appendChild(dayEl);
+            });
+
+            // Fill remaining grid to complete the last row if needed (optional, for aesthetics)
+            const totalCells = startDayIndex + days.length;
+            const remainingCells = 7 - (totalCells % 7);
+            if (remainingCells < 7) {
+                for (let i = 0; i < remainingCells; i++) {
+                    const emptyCell = document.createElement('div');
+                    emptyCell.className = 'h-24 md:h-32 bg-gray-50/50 border-r border-b border-gray-100';
+                    calendarGrid.appendChild(emptyCell);
+                }
+            }
+
+        }
+
+        function setLoadingState(isLoading) {
+            if (isLoading) {
+                calendarGrid.innerHTML = `
+                    <div class="col-span-7 flex items-center justify-center p-20 text-gray-500">
+                         <div class="flex flex-col items-center">
+                             <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-islamic-green mb-4"></div>
+                             <p>Loading...</p>
+                         </div>
+                     </div>
+                 `;
+            }
+        }
+
+        function showError(msg) {
+            calendarGrid.innerHTML = `
+                <div class="col-span-7 flex items-center justify-center p-20 text-red-500">
+                     <p>${msg}</p>
+                 </div>
+             `;
+        }
+    </script>
+</body>
+
+</html>
