@@ -858,7 +858,8 @@
      * Updates the page with live API data
      */
     function updatePageWithLiveData(apiData) {
-      const { nisab_thresholds, updated_at } = apiData.data;
+      const { nisab_thresholds } = apiData.data;
+      const { updated_at } = apiData;
       const currency = apiData.currency.toUpperCase();
 
       // Format update time
