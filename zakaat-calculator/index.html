@@ -70,13 +70,51 @@
     crossorigin="anonymous"></script>
 
   <!-- Schema.org markup -->
+  <!-- Schema.org markup -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "Zakat Calculator - QuickNisab",
-      "description": "An explanation-first Zakat calculator with guidance, examples and a privacy-focused calculation that runs entirely in your browser.",
-      "url": "https://quicknisab.com/zakaat-calculator"
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "QuickNisab Zakat Calculator",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "Web",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "description": "An accurate, privacy-focused Zakat calculator for cash, gold, silver, and investments. Based on authentic Islamic rulings.",
+          "featureList": "Calculate Zakat on Gold, Silver, Cash. Live Gold/Silver prices. Privacy-first local calculation.",
+          "author": {
+            "@type": "Organization",
+            "name": "QuickNisab",
+            "url": "https://quicknisab.com/"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is Nisab?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Nisab is the minimum amount of wealth a Muslim must possess before they become liable to pay Zakat. It is equivalent to 87.48 grams of gold or 612.36 grams of silver."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is Zakat due on jewelry?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Jewelry for personal use is generally not subject to Zakat according to many scholars, but investment jewelry is. Consult a local scholar for specific rulings."
+              }
+            }
+          ]
+        }
+      ]
     }
   </script>
 
