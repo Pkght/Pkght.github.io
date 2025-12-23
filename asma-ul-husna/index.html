@@ -86,6 +86,39 @@
         .arabic-text {
             direction: rtl;
         }
+
+        /* Memorization Mode Styles */
+        .memorization-active .name-transliteration,
+        .memorization-active .name-meaning {
+            filter: blur(6px);
+            opacity: 0.5;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .memorization-active .group:hover .name-transliteration,
+        .memorization-active .group:hover .name-meaning {
+            filter: blur(0);
+            opacity: 1;
+            user-select: auto;
+        }
+
+        /* Tasbih Modal Animation */
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-animate {
+            animation: modalFadeIn 0.2s ease-out forwards;
+        }
     </style>
 </head>
 
@@ -288,6 +321,38 @@
 
                 <!-- Status/Error -->
                 <div id="statusArea" class="hidden mb-6 p-4 rounded-lg"></div>
+
+                <!-- Controls Area -->
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-8">
+                    <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
+                        <!-- Search Bar -->
+                        <div class="relative w-full md:w-1/2">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                            <input type="text" id="searchInput"
+                                class="pl-10 block w-full shadow-sm focus:ring-islamic-green focus:border-islamic-green sm:text-sm border-gray-300 rounded-lg p-2.5 bg-gray-50 border"
+                                placeholder="Search by name, meaning, or number...">
+                        </div>
+
+                        <!-- Memorization Toggle -->
+                        <div class="flex items-center gap-3 bg-gray-50 px-4 py-2 rounded-lg border border-gray-200">
+                            <span class="text-sm font-medium text-gray-700">Memorization Mode</span>
+                            <button id="memorizationToggle"
+                                class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-islamic-green bg-gray-200"
+                                role="switch" aria-checked="false">
+                                <span class="sr-only">Use setting</span>
+                                <span aria-hidden="true"
+                                    class="pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 translate-x-0">
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
                 <div id="namesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                     dir="rtl">
@@ -3156,7 +3221,232 @@
         document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
+
+        // --- New Features Implementation ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeNewFeatures();
+        });
+
+        function initializeNewFeatures() {
+            const cards = document.querySelectorAll('#namesGrid > div');
+
+            cards.forEach((card, index) => {
+                // 1. Add classes for Memorization Mode
+                // Structure: h2 (Arabic), p (Transliteration), p (Meaning), p (Description)
+                const ps = card.querySelectorAll('p');
+                if (ps.length >= 2) {
+                    ps[0].classList.add('name-transliteration'); // Ar Rahmaan
+                    ps[1].classList.add('name-meaning'); // The Most Merciful
+                }
+
+                // 2. Inject Tasbih Button
+                const playBtn = card.querySelector('.play-btn');
+                if (playBtn) {
+                    // Create wrapper for buttons
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'mt-auto flex gap-2 w-full';
+
+                    // Move Play button into wrapper and adjust styles
+                    playBtn.classList.remove('mt-auto'); // Remove margin-top: auto from button as it's now on wrapper
+                    playBtn.classList.add('flex-1', 'justify-center'); // Make it take available space
+
+                    playBtn.parentNode.insertBefore(wrapper, playBtn);
+                    wrapper.appendChild(playBtn);
+
+                    // Create Tasbih Button
+                    const tasbihBtn = document.createElement('button');
+                    tasbihBtn.className = 'flex items-center justify-center w-12 h-10 flex-shrink-0 rounded-full bg-gray-50 hover:bg-islamic-green hover:text-white transition-all text-gray-600 tasbih-btn';
+                    tasbihBtn.title = "Tasbih (Counter)";
+                    tasbihBtn.setAttribute('aria-label', 'Open Tasbih Counter');
+                    // Icon: Finger tapping or beads
+                    tasbihBtn.innerHTML = `
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                    `;
+
+                    wrapper.appendChild(tasbihBtn);
+
+                    // Event Listener for Tasbih
+                    tasbihBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        // Extract Data
+                        const arabic = card.querySelector('h2').textContent;
+                        const english = ps[0].textContent;
+                        // Use a unique ID for storage: 'tasbih_count_1'
+                        const id = index + 1;
+                        openTasbihModal(id, arabic, english);
+                    });
+                }
+            });
+
+            setupSearch();
+            setupMemorizationToggle();
+            setupTasbihModal();
+        }
+
+        // --- Search Functionality ---
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const grid = document.getElementById('namesGrid');
+            const cards = Array.from(grid.children);
+
+            searchInput.addEventListener('keyup', (e) => {
+                const term = e.target.value.toLowerCase();
+
+                cards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    // Basic search: checks if the card's text contains the term
+                    // Includes Arabic, Transliteration, Meaning, Index
+                    if (text.includes(term)) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        }
+
+        // --- Memorization Mode ---
+        function setupMemorizationToggle() {
+            const toggleBtn = document.getElementById('memorizationToggle');
+            const grid = document.getElementById('namesGrid');
+            const toggleKnob = toggleBtn.querySelector('span[aria-hidden="true"]');
+            let isMemorizationOn = false;
+
+            toggleBtn.addEventListener('click', () => {
+                isMemorizationOn = !isMemorizationOn;
+                toggleBtn.setAttribute('aria-checked', isMemorizationOn);
+
+                if (isMemorizationOn) {
+                    toggleBtn.classList.remove('bg-gray-200');
+                    toggleBtn.classList.add('bg-islamic-green');
+                    toggleKnob.classList.add('translate-x-5');
+                    toggleKnob.classList.remove('translate-x-0');
+                    grid.classList.add('memorization-active');
+                } else {
+                    toggleBtn.classList.add('bg-gray-200');
+                    toggleBtn.classList.remove('bg-islamic-green');
+                    toggleKnob.classList.remove('translate-x-5');
+                    toggleKnob.classList.add('translate-x-0');
+                    grid.classList.remove('memorization-active');
+                }
+            });
+        }
+
+        // --- Tasbih Logic ---
+        let currentTasbihId = null;
+        let currentCount = 0;
+
+        function openTasbihModal(id, arabic, english) {
+            const modal = document.getElementById('tasbihModal');
+            const arabicEl = document.getElementById('tasbihArabicName');
+            const englishEl = document.getElementById('tasbihEnglishName');
+            const countEl = document.getElementById('tasbihCount');
+
+            currentTasbihId = 'tasbih_' + id;
+            arabicEl.textContent = arabic;
+            englishEl.textContent = english;
+
+            // Load saved count
+            const saved = localStorage.getItem(currentTasbihId);
+            currentCount = saved ? parseInt(saved) : 0;
+            countEl.textContent = currentCount;
+
+            modal.classList.remove('hidden');
+        }
+
+        function setupTasbihModal() {
+            const modal = document.getElementById('tasbihModal');
+            const closeBtn = document.getElementById('closeTasbihBtn');
+            const backdrop = document.getElementById('tasbihModalBackdrop');
+            const incrementArea = document.getElementById('tasbihIncrementArea');
+            const resetBtn = document.getElementById('tasbihResetBtn');
+            const countEl = document.getElementById('tasbihCount');
+
+            function closeModal() {
+                modal.classList.add('hidden');
+                currentTasbihId = null;
+            }
+
+            closeBtn.addEventListener('click', closeModal);
+            backdrop.addEventListener('click', closeModal);
+
+            // Increment Logic
+            incrementArea.addEventListener('click', () => {
+                if (!currentTasbihId) return;
+
+                currentCount++;
+                countEl.textContent = currentCount;
+                localStorage.setItem(currentTasbihId, currentCount);
+
+                // Animation effect
+                incrementArea.parentElement.classList.add('scale-95');
+                setTimeout(() => incrementArea.parentElement.classList.remove('scale-95'), 100);
+            });
+
+            // Reset Logic
+            resetBtn.addEventListener('click', () => {
+                if (confirm('Are you sure you want to reset the counter?')) {
+                    currentCount = 0;
+                    countEl.textContent = 0;
+                    localStorage.setItem(currentTasbihId, 0);
+                }
+            });
+        }
     </script>
+
+    <!-- Tasbih Modal -->
+    <div id="tasbihModal" class="hidden fixed inset-0 z-[100] overflow-y-auto" aria-labelledby="modal-title"
+        role="dialog" aria-modal="true">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
+                id="tasbihModalBackdrop"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div
+                class="relative inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full modal-animate">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="flex justify-between items-start absolute top-4 right-4">
+                        <button type="button" id="closeTasbihBtn"
+                            class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none">
+                            <span class="sr-only">Close</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="text-center mt-2">
+                        <h3 class="text-2xl font-arabic text-islamic-green mb-1" id="tasbihArabicName"></h3>
+                        <p class="text-lg font-bold text-gray-900" id="tasbihEnglishName"></p>
+
+                        <div class="mt-8 mb-6">
+                            <div class="relative inline-flex items-center justify-center">
+                                <div
+                                    class="w-40 h-40 rounded-full border-4 border-islamic-green/20 flex items-center justify-center bg-islamic-green/5">
+                                    <span class="text-5xl font-bold text-islamic-green" id="tasbihCount">0</span>
+                                </div>
+                                <button id="tasbihIncrementArea"
+                                    class="absolute inset-0 w-full h-full rounded-full cursor-pointer focus:outline-none"></button>
+                            </div>
+                            <p class="text-sm text-gray-400 mt-2">Tap circle to count</p>
+                        </div>
+
+                        <div class="flex justify-center gap-4">
+                            <button type="button" id="tasbihResetBtn"
+                                class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-50 text-base font-medium text-red-700 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm">
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>
