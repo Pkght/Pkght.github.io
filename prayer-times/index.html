@@ -84,6 +84,74 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* Compass Styles */
+        .compass-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            transition: opacity 0.3s ease;
+        }
+
+        .compass-rose {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23374151' stroke-width='2'%3E%3Ccircle cx='50' cy='50' r='48' stroke='%23e5e7eb' stroke-width='4' fill='white'/%3E%3Cpath d='M50 5 L50 15 M50 85 L50 95 M5 50 L15 50 M85 50 L95 50' /%3E%3Ctext x='50' y='28' text-anchor='middle' font-size='12' fill='%23ef4444' font-weight='bold' font-family='sans-serif'%3EN%3C/text%3E%3Ctext x='50' y='82' text-anchor='middle' font-size='10' fill='%236b7280' font-family='sans-serif'%3ES%3C/text%3E%3Ctext x='78' y='54' text-anchor='middle' font-size='10' fill='%236b7280' font-family='sans-serif'%3EE%3C/text%3E%3Ctext x='22' y='54' text-anchor='middle' font-size='10' fill='%236b7280' font-family='sans-serif'%3EW%3C/text%3E%3C/svg%3E");
+            background-size: contain;
+            transition: transform 0.1s ease-out;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .qibla-pointer-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            /* This rotates with the rose relative to North, so we need to set its rotation to the Qibla Angle */
+        }
+
+        .qibla-pointer {
+            position: absolute;
+            top: 10px;
+            /* Adjust based on rose size */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 20px solid #0a5c36;
+            /* Islamic Green */
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+        }
+
+        .qibla-pointer::after {
+            content: '🕋';
+            position: absolute;
+            top: 20px;
+            left: -8px;
+            font-size: 16px;
+        }
+
+        .phone-indicator {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 12px;
+            background-color: #ef4444;
+            /* Red for 'This way up' */
+            z-index: 10;
+            border-radius: 2px;
+        }
     </style>
 </head>
 
@@ -376,18 +444,57 @@
                     </div>
 
                     <!-- Qibla Info -->
-                    <div
-                        class="bg-white rounded-2xl shadow-soft p-6 border border-gray-100 flex items-center justify-between">
-                        <div>
-                            <h3 class="text-lg font-bold text-gray-900">Qibla Direction</h3>
-                            <p class="text-gray-600 text-sm" id="qiblaText">Loading...</p>
-                        </div>
-                        <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
-                            <svg class="w-6 h-6 text-islamic-green" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-                            </svg>
+                    <div class="bg-white rounded-2xl shadow-soft p-6 border border-gray-100">
+                        <div class="flex flex-col items-center">
+                            <div class="w-full flex justify-between items-start mb-6">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900">Qibla Direction</h3>
+                                    <p class="text-gray-600 text-sm mt-1" id="qiblaText">Loading...</p>
+                                    <p class="text-xs text-slate-400 mt-2 hidden" id="compassStatus">Static Compass</p>
+                                    <button id="enableCompassBtn"
+                                        class="hidden mt-2 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-1 px-3 rounded-full transition-colors">
+                                        Enable Compass
+                                    </button>
+                                </div>
+                                <div class="bg-gray-50 p-2 rounded-lg">
+                                    <span class="text-xs font-mono text-gray-500 block text-center">DEG</span>
+                                    <span class="text-lg font-bold text-islamic-green block text-center"
+                                        id="qiblaDegrees">--°</span>
+                                </div>
+                            </div>
+
+                            <!-- Dynamic Compass -->
+                            <div id="dynamicCompass" class="compass-container mb-4 hidden">
+                                <div class="phone-indicator"></div>
+                                <div class="compass-rose" id="compassRose">
+                                    <!-- Qibla Pointer is inside the Rose so it stays fixed relative to North ticks, 
+                                         It needs to be rotated to the specific angle of Qibla relative to North -->
+                                    <div class="qibla-pointer-container" id="qiblaPointerContainer">
+                                        <div class="qibla-pointer"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Static Fallback Compass -->
+                            <div id="staticCompass" class="relative w-32 h-32 flex items-center justify-center mb-4">
+                                <div class="absolute inset-0 border-4 border-gray-200 rounded-full"></div>
+                                <!-- Arrow pointing to Qibla -->
+                                <div id="staticArrow"
+                                    class="absolute inset-0 flex items-start justify-center transition-transform duration-700">
+                                    <div
+                                        class="mt-2 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[30px] border-b-islamic-green filter drop-shadow">
+                                    </div>
+                                </div>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="w-3 h-3 bg-gray-800 rounded-full z-10"></div>
+                                </div>
+                                <span class="absolute -top-6 font-bold text-gray-400 text-xs">N</span>
+                            </div>
+
+                            <p class="text-xs text-gray-400 text-center max-w-xs mx-auto">
+                                <span id="compassInstruction">Phone's top edge should point towards Qibla
+                                    direction.</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -434,6 +541,20 @@
         const errorArea = document.getElementById('errorArea');
         const btn12h = document.getElementById('btn12h');
         const btn24h = document.getElementById('btn24h');
+
+        // Compass Elements
+        const dynamicCompass = document.getElementById('dynamicCompass');
+        const staticCompass = document.getElementById('staticCompass');
+        const compassRose = document.getElementById('compassRose');
+        const qiblaPointerContainer = document.getElementById('qiblaPointerContainer');
+        const staticArrow = document.getElementById('staticArrow');
+        const compassStatus = document.getElementById('compassStatus');
+        const enableCompassBtn = document.getElementById('enableCompassBtn');
+        const qiblaDegrees = document.getElementById('qiblaDegrees');
+        const compassInstruction = document.getElementById('compassInstruction');
+
+        let qiblaAngle = 0;
+        let isCompassActive = false;
 
         let currentFormat = '12h'; // Default
         let prayerData = null; // Store data to re-render on toggle
@@ -554,8 +675,21 @@
             document.getElementById('time-Isha').textContent = formatTime(times.Isha);
 
             // Qibla
+            // Qibla
             if (data.qibla) {
-                document.getElementById('qiblaText').textContent = `${data.qibla.direction.degrees}° from North`;
+                const angle = data.qibla.direction.degrees;
+                qiblaAngle = angle;
+                document.getElementById('qiblaText').textContent = `${angle}° from North`;
+                qiblaDegrees.textContent = `${Math.round(angle)}°`;
+
+                // Update Static Compass Arrow
+                // The arrow should point to the Qibla angle relative to North (Up)
+                staticArrow.style.transform = `rotate(${angle}deg)`;
+
+                // Update Dynamic Compass Pointer relative to the Rose
+                qiblaPointerContainer.style.transform = `rotate(${angle}deg)`;
+
+                initCompass();
             }
 
             // Next Prayer (Simple Logic - can be improved)
@@ -573,6 +707,81 @@
         document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
+
+        // Compass Logic
+        function initCompass() {
+            if (window.DeviceOrientationEvent) {
+                // Check if iOS 13+ permission is needed
+                if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                    compassStatus.textContent = "Tap to Enable Compass";
+                    compassStatus.classList.remove('hidden');
+                    enableCompassBtn.classList.remove('hidden');
+
+                    enableCompassBtn.addEventListener('click', () => {
+                        DeviceOrientationEvent.requestPermission()
+                            .then(response => {
+                                if (response === 'granted') {
+                                    enableCompassBtn.classList.add('hidden');
+                                    startCompass();
+                                } else {
+                                    showCompassError("Permission denied");
+                                }
+                            })
+                            .catch(console.error);
+                    });
+                } else {
+                    // Non-iOS or older iOS
+                    startCompass();
+                }
+            } else {
+                showCompassError("Not supported on this device");
+            }
+        }
+
+        function startCompass() {
+            window.addEventListener('deviceorientationabsolute', handleOrientation, true); // Android
+            window.addEventListener('deviceorientation', handleOrientation, true); // Standard/iOS
+
+            compassStatus.textContent = "Compass Active";
+            compassStatus.classList.remove('hidden');
+            compassStatus.classList.add('text-green-600');
+            compassStatus.classList.remove('text-slate-400');
+
+            staticCompass.classList.add('hidden');
+            dynamicCompass.classList.remove('hidden');
+            isCompassActive = true;
+        }
+
+        function handleOrientation(event) {
+            if (!isCompassActive) return;
+
+            let heading = null;
+
+            if (event.webkitCompassHeading) {
+                // iOS
+                heading = event.webkitCompassHeading;
+            } else if (event.alpha !== null) {
+                // Android / Standard
+                // alpha is rotation around z-axis. 
+                // For 'absolute' orientation, alpha=0 is North.
+                // However, browser implementation varies.
+                // We use 360 - alpha to get compass heading (clockwise from North)
+                heading = 360 - event.alpha;
+            }
+
+            if (heading !== null) {
+                // Rotate the Rose so N points to North
+                // If heading is 90 (East), we rotate rose -90deg so N is at left.
+                compassRose.style.transform = `rotate(${-heading}deg)`;
+            }
+        }
+
+        function showCompassError(msg) {
+            compassStatus.textContent = "Static Mode (" + msg + ")";
+            compassStatus.classList.remove('hidden');
+            staticCompass.classList.remove('hidden');
+            dynamicCompass.classList.add('hidden');
+        }
     </script>
 </body>
 
