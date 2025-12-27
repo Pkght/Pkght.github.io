@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact QuickNisab - Get in Touch</title>
+    <meta name="description"
+        content="Contact the QuickNisab team. We welcome your feedback, questions about our Zakat and Inheritance calculators, and suggestions for new Islamic tools.">
+    <meta name="keywords"
+        content="contact quicknisab, islamic tools support, zakat calculator help, feature request, report bug, muslim developer contact">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://quicknisab.com/contact/">
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact QuickNisab",
+      "description": "Contact page for QuickNisab users to get in touch with the team.",
+      "url": "https://quicknisab.com/contact",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "QuickNisab",
+        "email": "shujaat.ahmed142@gmail.com",
+        "logo": "https://quicknisab.com/logo.png"
+      }
+    }
+  </script>
+
+    <!-- Load Tailwind CSS from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                            53: '#0c4a6e',
+                        },
+                        accent: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f9a8d4',
+                            400: '#f472b6',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                            800: '#9d174d',
+                            900: '#831843',
+                        },
+                        islamic: {
+                            green: '#0a5c36',
+                            gold: '#d4af37',
+                            teal: '#2a9d8f',
+                            amber: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'serif': ['Merriweather', 'Georgia', 'serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+                        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Smooth transitions */
+        .transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+        }
+
+        /* Active link styling */
+        .active {
+            background-color: #f0f9ff;
+            border-left-color: #0ea5e9;
+            color: #0369a1;
+            font-weight: 600;
+        }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 font-sans text-gray-800">
+    <!-- Mobile Navigation -->
+    <nav class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm py-4 px-6">
+        <div class="flex justify-between items-center">
+            <h1 class="text-xl font-bold text-islamic-green">QuickNisab</h1>
+            <button id="mobile-menu-toggle" class="text-gray-600 hover:text-islamic-green focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden mt-4 pb-2">
+            <ul class="space-y-2">
+                <li><a href="/"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Home</a>
+                </li>
+                <li><a href="/zakaat-calculator"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Zakat
+                        Calculator</a>
+                </li>
+                <li><a href="/inheritance-calculator"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Inheritance
+                        Calculator</a></li>
+                <li><a href="/nisab-values"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Nisab
+                        Values</a></li>
+                <li><a href="/prayer-times"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Prayer
+                        Times</a></li>
+                <li><a href="/asma-ul-husna"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Asma-ul-Husna</a>
+                </li>
+                <li><a href="/articles"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Articles &
+                        Guides</a>
+                </li>
+                <li><a href="/about"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">About Us</a>
+                </li>
+                <li><a href="/contact"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all active">Contact
+                        Us</a>
+                </li>
+                <li><a href="/privacy-policy"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Privacy
+                        Policy</a></li>
+                <li><a href="/disclaimer"
+                        class="block py-2 px-4 rounded hover:bg-blue-50 hover:text-blue-700 transition-all">Disclaimer</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main App Container -->
+    <div class="flex min-h-screen pt-16 lg:pt-0">
+        <!-- Sticky Sidebar - Hidden on mobile, visible on lg screens -->
+        <aside
+            class="hidden lg:flex flex-col w-64 bg-white border-r border-gray-200 sticky top-0 h-screen overflow-y-auto no-scrollbar">
+            <!-- Sidebar Header -->
+            <div class="p-6 border-b border-gray-100">
+                <h1 class="text-2xl font-bold text-islamic-green">QuickNisab</h1>
+                <p class="text-sm text-gray-500 mt-1">Islamic Tools & Calculators</p>
+            </div>
+
+            <!-- Sidebar Navigation -->
+            <nav class="flex-1 p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="/"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                                </path>
+                            </svg>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/zakaat-calculator"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                            Zakat Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/inheritance-calculator"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+                                </path>
+                            </svg>
+                            Inheritance Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/nisab-values"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                </path>
+                            </svg>
+                            Nisab Values
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/prayer-times"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Prayer Times
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/asma-ul-husna"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                </path>
+                            </svg>
+                            Asma-ul-Husna
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/articles"
+                            class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z">
+                                </path>
+                            </svg>
+                            Articles & Guides
+                        </a>
+                    </li>
+
+                    <div class="pt-6 mt-6 border-t border-gray-100">
+                        <p class="px-4 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Legal & Info
+                        </p>
+                        <li>
+                            <a href="/about"
+                                class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                About Us
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/contact"
+                                class="flex items-center py-3 px-4 rounded-lg active hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                                Contact Us
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/privacy-policy"
+                                class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                                    </path>
+                                </svg>
+                                Privacy Policy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/disclaimer"
+                                class="flex items-center py-3 px-4 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-all text-gray-700">
+                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.732-.833-2.464 0L4.732 16.5c-.77.833.192 2.5 1.732 2.5z">
+                                    </path>
+                                </svg>
+                                Disclaimer
+                            </a>
+                        </li>
+                    </div>
+                </ul>
+
+                <!-- Sidebar Footer -->
+                <div class="mt-8 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-lg border border-blue-100">
+                    <p class="text-sm text-gray-700">
+                        <span class="font-semibold text-islamic-green">Trusted Tools</span>
+                        <span class="block text-gray-600 text-xs mt-1">Built with accuracy and Islamic principles in
+                            mind.</span>
+                    </p>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area (Scrollable) -->
+        <main class="flex-1 overflow-y-auto h-screen">
+            <div class="max-w-7xl mx-auto px-4 py-8 lg:px-8">
+                <!-- Page Header -->
+                <div class="mb-8">
+                    <div class="flex items-center mb-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-gradient-to-r from-islamic-green to-emerald-500 flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h1 class="text-3xl lg:text-4xl font-bold text-gray-900">Contact Us</h1>
+                    </div>
+                    <p class="text-lg text-gray-600">
+                        Have questions, feedback, or suggestions? We're here to listen.
+                    </p>
+                </div>
+
+                <!-- Contact Section -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Get in Touch Info -->
+                    <section class="bg-white rounded-2xl shadow-soft p-6 lg:p-8 border border-gray-100 h-full">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h2>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-blue-50 p-3 rounded-lg mr-4">
+                                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-gray-900">Email Us</h3>
+                                    <p class="text-gray-600 text-sm mb-1">For general inquiries, support, and feedback.
+                                    </p>
+                                    <a href="mailto:shujaat.ahmed142@gmail.com"
+                                        class="text-islamic-green font-bold hover:underline">shujaat.ahmed142@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="bg-amber-50 p-3 rounded-lg mr-4">
+                                    <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-gray-900">Support Hours</h3>
+                                    <p class="text-gray-600 text-sm">We try to respond to all emails within 24-48 hours,
+                                        insha'Allah.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Contact Form -->
+                    <section class="bg-white rounded-2xl shadow-soft p-6 lg:p-8 border border-gray-100">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Send a Message</h2>
+                        <form action="mailto:shujaat.ahmed142@gmail.com" method="post" enctype="text/plain"
+                            class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                                <input type="text" id="name" name="name" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-islamic-green focus:border-islamic-green outline-none transition-all">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Your
+                                    Email</label>
+                                <input type="email" id="email" name="email" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-islamic-green focus:border-islamic-green outline-none transition-all">
+                            </div>
+                            <div>
+                                <label for="subject"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+                                <select id="subject" name="subject"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-islamic-green focus:border-islamic-green outline-none transition-all">
+                                    <option value="General Inquiry">General Inquiry</option>
+                                    <option value="Bug Report">Bug Report</option>
+                                    <option value="Feature Request">Feature Request</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="message"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                                <textarea id="message" name="message" rows="4" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-islamic-green focus:border-islamic-green outline-none transition-all"></textarea>
+                            </div>
+                            <button type="submit"
+                                class="w-full bg-islamic-green hover:bg-emerald-800 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg hover:shadow-xl flex items-center justify-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                </svg>
+                                Send Message
+                            </button>
+                        </form>
+                    </section>
+                </div>
+
+                <!-- Footer -->
+                <footer class="pt-8 mt-8 border-t border-gray-200">
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                        <div class="mb-4 md:mb-0">
+                            <h3 class="text-xl font-bold text-islamic-green">QuickNisab</h3>
+                            <p class="text-gray-600 text-sm">Islamic Tools & Calculators</p>
+                        </div>
+
+                        <div class="flex space-x-6">
+                            <a href="/privacy-policy"
+                                class="text-gray-600 hover:text-islamic-green transition-all">Privacy
+                                Policy</a>
+                            <a href="/disclaimer"
+                                class="text-gray-600 hover:text-islamic-green transition-all">Disclaimer</a>
+                            <a href="/about" class="text-gray-600 hover:text-islamic-green transition-all">About Us</a>
+                            <a href="/contact"
+                                class="text-gray-600 hover:text-islamic-green transition-all font-semibold">Contact
+                                Us</a>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-6 pt-6 border-t border-gray-100">
+                        <p class="text-sm text-gray-500">© 2025 QuickNisab. All rights reserved. This website provides
+                            tools for
+                            educational purposes only.</p>
+                    </div>
+                </footer>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript for Mobile Menu & Active Link -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function () {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function (event) {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+
+            if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+        // Set active link logic is handled inline for this simple page, but kept for consistency
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentPath = window.location.pathname;
+            const links = document.querySelectorAll('aside a, #mobile-menu a');
+
+            links.forEach(link => {
+                // Simple active check
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+    <!-- Cookie Consent -->
+    <script src="/public/js/cookie-consent.js"></script>
+</body>
+
+</html>
