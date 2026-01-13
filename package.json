@@ -1,0 +1,12 @@
+{
+  "name": "quicknisab-tools",
+  "version": "1.0.0",
+  "description": "Islamic tools and calculators",
+  "scripts": {
+    "build:css": "tailwindcss -i ./input.css -o ./public/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./input.css -o ./public/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
